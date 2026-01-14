@@ -6,22 +6,33 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:pull": "npx prisma db pull",
+    "db:push": "npx prisma db push",
+    "db:generate": "npx prisma generate",
+    "db:studio": "npx prisma studio"
   },
   "dependencies": {
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "next": "16.0.1"
+    "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/client": "^7.2.0",
+    "@types/pg": "^8.16.0",
+    "dotenv": "^17.2.3",
+    "next": "16.1.1",
+    "pg": "^8.16.3",
+    "prisma": "^7.2.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^25.0.8",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
     "babel-plugin-react-compiler": "1.0.0",
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.1"
+    "eslint": "^9.39.2",
+    "eslint-config-next": "16.1.1",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
   }
 }
