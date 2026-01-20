@@ -1,6 +1,6 @@
 export {
   DEFAULT_UNAUTHENTICATED_REDIRECT,
   PROTECTED_ROUTES,
-} from "./consts/auth";
+} from './consts/auth'
 
-export { authConfig } from "./configs/auth.config";
+export { authConfig } from './configs/auth.config'

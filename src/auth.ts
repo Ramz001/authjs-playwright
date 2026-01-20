@@ -1,5 +1,5 @@
-import NextAuth from "next-auth";
-import { authConfig } from "./features/auth";
+import NextAuth from 'next-auth'
+import { authConfig } from './features/auth'
 
 export const {
   handlers: { GET, POST },
@@ -8,4 +8,4 @@ export const {
   signOut,
 } = NextAuth({
   ...authConfig,
-});
+})
