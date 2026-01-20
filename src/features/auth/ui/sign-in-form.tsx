@@ -25,8 +25,10 @@ import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export function SignInForm() {
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
 
   const form = useForm({
@@ -39,20 +41,24 @@ export function SignInForm() {
     },
     onSubmit: async ({ value }) => {
       try {
-        await signIn('credentials', {
+        const res = await signIn('credentials', {
           ...value,
-          redirect: true,
-          redirectTo: '/settings',
+          redirect: false,
         })
+
+        if (res?.error) {
+          new Error(res.error)
+          return
+        }
+
         toast.success('Signed in successfully.')
+        router.push('/settings')
       } catch (error) {
         console.error(error)
         toast.error('Unable to sign in right now. Please try again later.')
       }
     },
   })
-
-  const isSubmitting = form.state.isSubmitting
 
   return (
     <Card className="w-full sm:max-w-md">
@@ -135,9 +141,14 @@ export function SignInForm() {
       </CardContent>
       <CardFooter>
         <Field>
-          <Button type="submit" form="sign-in-form" disabled={isSubmitting}>
-            {isSubmitting ? <Spinner /> : 'Login'}
-          </Button>
+          <form.Subscribe
+            selector={(state) => state.isSubmitting}
+            children={(isSubmitting) => (
+              <Button type="submit" form="sign-in-form" disabled={isSubmitting}>
+                {isSubmitting ? <Spinner /> : 'Login'}
+              </Button>
+            )}
+          />
           <GithubLoginButton />
           <FieldDescription className="text-center">
             Don&apos;t have an account?{' '}

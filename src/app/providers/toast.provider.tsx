@@ -8,7 +8,7 @@ export default function ToastProvider({
   return (
     <>
       {children}
-      <Toaster />
+      <Toaster position="top-center" richColors />
     </>
   )
 }

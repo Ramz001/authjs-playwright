@@ -58,8 +58,6 @@ export function SignUpForm() {
     },
   })
 
-  const isSubmitting = form.state.isSubmitting
-
   return (
     <Card className="w-full sm:max-w-md">
       <CardContent>
@@ -208,9 +206,14 @@ export function SignUpForm() {
       </CardContent>
       <CardFooter>
         <Field>
-          <Button type="submit" form="sign-up-form" disabled={isSubmitting}>
-            {isSubmitting ? <Spinner /> : 'Sign up'}
-          </Button>
+          <form.Subscribe
+            selector={(state) => state.isSubmitting}
+            children={(isSubmitting) => (
+              <Button type="submit" form="sign-up-form" disabled={isSubmitting}>
+                {isSubmitting ? <Spinner /> : 'Sign up'}
+              </Button>
+            )}
+          />
           <GithubLoginButton />
           <FieldDescription className="text-center">
             Already have an account? <Link href="/auth/sign-in">Sign in</Link>
