@@ -5,8 +5,8 @@ import { LoginSchema } from '../models/auth.schema'
 import GithubProvider from 'next-auth/providers/github'
 import { NextAuthConfig } from 'next-auth'
 import { Role } from '@/shared/generated/prisma/enums'
-import { PROTECTED_ROUTES, ADMIN_ROUTES } from '../consts/auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
+import { checkRouteAccess } from '../lib/check-route-access'
 
 export const authConfig = {
   adapter: PrismaAdapter(prisma),
@@ -59,25 +59,21 @@ export const authConfig = {
   callbacks: {
     authorized({ request: { nextUrl }, auth }) {
       const { pathname } = nextUrl
-      const role = auth?.user?.role
 
-      const isAuthRoute = PROTECTED_ROUTES.some((route) =>
-        pathname.startsWith(route)
-      )
-      const isAdminRoute = ADMIN_ROUTES.some((route) =>
-        pathname.startsWith(route)
-      )
+      const routeAccess = checkRouteAccess(pathname, auth?.user)
 
-      if (auth?.user) {
-        if (isAuthRoute) return Response.redirect(new URL('/', nextUrl))
-        if (isAdminRoute && role !== Role.ADMIN)
-          return Response.redirect(new URL('/', nextUrl))
+      if (routeAccess.success) {
+        return true
       }
 
-      // here the user is not logged in
-      if (isAuthRoute) return true
+      if (routeAccess.reason === 'unauthenticated') {
+        return Response.redirect(new URL('/auth/sign-in', nextUrl))
+      }
 
-      return !!auth?.user
+      if (routeAccess.reason === 'unauthorized') {
+        return Response.redirect(new URL('/', nextUrl))
+      }
+      return false
     },
     jwt({ token, user, trigger, session }) {
       if (user) {

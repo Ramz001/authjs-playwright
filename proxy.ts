@@ -1,20 +1,18 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@/features/auth/server'
-import {
-  PROTECTED_ROUTES,
-  DEFAULT_UNAUTHENTICATED_REDIRECT,
-} from '@features/auth/server'
+import { checkRouteAccess } from '@/features/auth/server'
 
 export default auth((req) => {
-  const { nextUrl } = req
-  const session = req.auth
-  const isListedProtectedRoute = PROTECTED_ROUTES.some((route) =>
-    nextUrl.pathname.includes(route)
-  )
+  const { pathname } = req.nextUrl
+  const user = req.auth?.user
+  const routeAccess = checkRouteAccess(pathname, user)
 
-  if (!session?.user && isListedProtectedRoute) {
+  if (!routeAccess.success) {
     return NextResponse.redirect(
-      new URL(DEFAULT_UNAUTHENTICATED_REDIRECT, nextUrl)
+      new URL(
+        routeAccess.reason === 'unauthenticated' ? '/' : '/403',
+        req.nextUrl
+      )
     )
   }
 })

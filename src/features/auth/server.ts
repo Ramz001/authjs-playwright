@@ -1,6 +1,2 @@
-export {
-  DEFAULT_UNAUTHENTICATED_REDIRECT,
-  PROTECTED_ROUTES,
-} from './consts/auth'
-
+export { checkRouteAccess } from './lib/check-route-access'
 export { GET, POST, auth } from './api/auth'
