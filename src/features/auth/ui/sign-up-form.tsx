@@ -15,12 +15,22 @@ import {
   FieldLabel,
 } from '@/shared/ui/field'
 import { Input } from '@/shared/ui/input'
+import {
+  InputGroup,
+  InputGroupInput,
+  InputGroupAddon,
+} from '@shared/ui/input-group'
 import { Spinner } from '@/shared/ui/spinner'
 import { GithubLoginButton } from './github-login-button'
 import { signUpAction } from '../actions/sign-up.action'
 import { signIn } from 'next-auth/react'
+import { Eye, EyeOff } from 'lucide-react'
+import { useState } from 'react'
 
 export function SignUpForm() {
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
   const form = useForm({
     defaultValues: {
       name: '',
@@ -35,7 +45,8 @@ export function SignUpForm() {
       try {
         await signUpAction(value)
         await signIn('credentials', {
-          ...value,
+          email: value.email,
+          password: value.password,
           redirect: true,
           redirectTo: '/settings',
         })
@@ -121,20 +132,26 @@ export function SignUpForm() {
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Password</FieldLabel>
-                    <Input
-                      id={field.name}
-                      name={field.name}
-                      type="password"
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      aria-invalid={isInvalid}
-                      placeholder="••••••••"
-                      autoComplete="new-password"
-                    />
-                    <FieldDescription>
-                      Password must be at least 6 characters.
-                    </FieldDescription>
+                    <InputGroup>
+                      <InputGroupInput
+                        id={field.name}
+                        name={field.name}
+                        type={showPassword ? 'text' : 'password'}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        aria-invalid={isInvalid}
+                        placeholder="••••••••"
+                        autoComplete="new-password"
+                      />
+                      <InputGroupAddon
+                        align="inline-end"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="cursor-pointer"
+                      >
+                        {showPassword ? <Eye /> : <EyeOff />}
+                      </InputGroupAddon>
+                    </InputGroup>
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors} />
                     )}
@@ -153,17 +170,32 @@ export function SignUpForm() {
                     <FieldLabel htmlFor={field.name}>
                       Confirm password
                     </FieldLabel>
-                    <Input
-                      id={field.name}
-                      name={field.name}
-                      type="password"
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      aria-invalid={isInvalid}
-                      placeholder="••••••••"
-                      autoComplete="new-password"
-                    />
+                    <InputGroup>
+                      <InputGroupInput
+                        id={field.name}
+                        name={field.name}
+                        type={showConfirmPassword ? 'text' : 'password'}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        aria-invalid={isInvalid}
+                        placeholder="••••••••"
+                        autoComplete="new-password"
+                      />
+                      <InputGroupAddon
+                        align="inline-end"
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
+                        className="cursor-pointer"
+                      >
+                        {showConfirmPassword ? <Eye /> : <EyeOff />}
+                      </InputGroupAddon>
+                    </InputGroup>
+
+                    <FieldDescription>
+                      Password must be at least 6 characters.
+                    </FieldDescription>
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors} />
                     )}

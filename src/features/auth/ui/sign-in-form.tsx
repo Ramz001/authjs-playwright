@@ -14,12 +14,21 @@ import {
   FieldLabel,
 } from '@/shared/ui/field'
 import { Input } from '@/shared/ui/input'
+import {
+  InputGroup,
+  InputGroupInput,
+  InputGroupAddon,
+} from '@shared/ui/input-group'
 import { Spinner } from '@/shared/ui/spinner'
 import { GithubLoginButton } from './github-login-button'
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
+import { Eye, EyeOff } from 'lucide-react'
+import { useState } from 'react'
 
 export function SignInForm() {
+  const [showPassword, setShowPassword] = useState(false)
+
   const form = useForm({
     defaultValues: {
       email: '',
@@ -91,17 +100,26 @@ export function SignInForm() {
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Password</FieldLabel>
-                    <Input
-                      id={field.name}
-                      name={field.name}
-                      type="password"
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      aria-invalid={isInvalid}
-                      placeholder="••••••••"
-                      autoComplete="current-password"
-                    />
+                    <InputGroup>
+                      <InputGroupInput
+                        id={field.name}
+                        name={field.name}
+                        type={showPassword ? 'text' : 'password'}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        aria-invalid={isInvalid}
+                        placeholder="••••••••"
+                        autoComplete="current-password"
+                      />
+                      <InputGroupAddon
+                        align="inline-end"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="cursor-pointer"
+                      >
+                        {showPassword ? <Eye /> : <EyeOff />}
+                      </InputGroupAddon>
+                    </InputGroup>
                     <FieldDescription>
                       Password must be at least 6 characters.
                     </FieldDescription>
