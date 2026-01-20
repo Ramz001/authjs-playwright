@@ -7,14 +7,7 @@ import { toast } from "sonner";
 
 import { LoginSchema } from "../models/auth.schema";
 import { Button } from "@/shared/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/shared/ui/card";
+import { Card, CardContent, CardFooter } from "@/shared/ui/card";
 import {
   Field,
   FieldDescription,
@@ -53,12 +46,6 @@ export function SignInForm() {
 
   return (
     <Card className="w-full sm:max-w-md">
-      <CardHeader>
-        <CardTitle>Sign in</CardTitle>
-        <CardDescription>
-          Use your email and password to access your account.
-        </CardDescription>
-      </CardHeader>
       <CardContent>
         <form
           id="sign-in-form"
@@ -67,7 +54,7 @@ export function SignInForm() {
             void form.handleSubmit();
           }}
         >
-          <FieldGroup>
+          <FieldGroup className="gap-2">
             <form.Field
               name="email"
               children={(field) => {
@@ -134,7 +121,8 @@ export function SignInForm() {
           </Button>
           <GithubLoginButton />
           <FieldDescription className="text-center">
-            Don&apos;t have an account? <Link href="/auth/sign-up">Sign up</Link>
+            Don&apos;t have an account?{" "}
+            <Link href="/auth/sign-up">Sign up</Link>
           </FieldDescription>
         </Field>
       </CardFooter>
