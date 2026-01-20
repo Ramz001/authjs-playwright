@@ -297,7 +297,7 @@ export type UserScalarWhereWithAggregatesInput = {
 }
 
 export type UserCreateInput = {
-  id: string
+  id?: string
   name?: string | null
   email: string
   emailVerified?: Date | string | null
@@ -312,7 +312,7 @@ export type UserCreateInput = {
 }
 
 export type UserUncheckedCreateInput = {
-  id: string
+  id?: string
   name?: string | null
   email: string
   emailVerified?: Date | string | null
@@ -365,7 +365,7 @@ export type UserUncheckedUpdateInput = {
 }
 
 export type UserCreateManyInput = {
-  id: string
+  id?: string
   name?: string | null
   email: string
   emailVerified?: Date | string | null
@@ -536,7 +536,7 @@ export type EnumRoleFieldUpdateOperationsInput = {
 }
 
 export type UserCreateWithoutAccountInput = {
-  id: string
+  id?: string
   name?: string | null
   email: string
   emailVerified?: Date | string | null
@@ -550,7 +550,7 @@ export type UserCreateWithoutAccountInput = {
 }
 
 export type UserUncheckedCreateWithoutAccountInput = {
-  id: string
+  id?: string
   name?: string | null
   email: string
   emailVerified?: Date | string | null
@@ -628,7 +628,7 @@ export type UserUncheckedUpdateWithoutAccountInput = {
 }
 
 export type UserCreateWithoutAuthenticatorInput = {
-  id: string
+  id?: string
   name?: string | null
   email: string
   emailVerified?: Date | string | null
@@ -642,7 +642,7 @@ export type UserCreateWithoutAuthenticatorInput = {
 }
 
 export type UserUncheckedCreateWithoutAuthenticatorInput = {
-  id: string
+  id?: string
   name?: string | null
   email: string
   emailVerified?: Date | string | null
@@ -720,7 +720,7 @@ export type UserUncheckedUpdateWithoutAuthenticatorInput = {
 }
 
 export type UserCreateWithoutSessionInput = {
-  id: string
+  id?: string
   name?: string | null
   email: string
   emailVerified?: Date | string | null
@@ -734,7 +734,7 @@ export type UserCreateWithoutSessionInput = {
 }
 
 export type UserUncheckedCreateWithoutSessionInput = {
-  id: string
+  id?: string
   name?: string | null
   email: string
   emailVerified?: Date | string | null

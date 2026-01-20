@@ -28,6 +28,8 @@ export function SignUpForm() {
     },
     validators: {
       onSubmit: SignUpSchema,
+      onBlur: SignUpSchema,
+      onChange: SignUpSchema,
     },
     onSubmit: async ({ value }) => {
       try {

@@ -1,9 +1,10 @@
 import z from 'zod'
 
 const password = z.string().min(6)
+const email = z.email()
 
 export const LoginSchema = z.object({
-  email: z.email(),
+  email,
   password,
 })
 
@@ -14,7 +15,7 @@ export const SignUpSchema = z
       .trim()
       .min(2, 'Name must be at least 2 characters')
       .max(50, 'Name must be at most 50 characters'),
-    email: z.email(),
+    email,
     password,
     confirmPassword: password,
   })

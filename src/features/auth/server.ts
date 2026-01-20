@@ -3,4 +3,4 @@ export {
   PROTECTED_ROUTES,
 } from './consts/auth'
 
-export { authConfig } from './configs/auth.config'
+export { GET, POST, auth } from './api/auth'

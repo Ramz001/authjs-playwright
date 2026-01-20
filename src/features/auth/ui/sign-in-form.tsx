@@ -3,7 +3,6 @@
 
 import { LoginSchema } from '../models/auth.schema'
 import { useForm } from '@tanstack/react-form'
-import { signIn } from 'next-auth/react'
 import { toast } from 'sonner'
 import { Button } from '@/shared/ui/button'
 import { Card, CardContent, CardFooter } from '@/shared/ui/card'
@@ -18,6 +17,7 @@ import { Input } from '@/shared/ui/input'
 import { Spinner } from '@/shared/ui/spinner'
 import { GithubLoginButton } from './github-login-button'
 import Link from 'next/link'
+import { signIn } from '../api/auth'
 
 export function SignInForm() {
   const form = useForm({
@@ -27,11 +27,15 @@ export function SignInForm() {
     },
     validators: {
       onSubmit: LoginSchema,
+      onBlur: LoginSchema,
+      onChange: LoginSchema,
     },
     onSubmit: async ({ value }) => {
       try {
         await signIn('credentials', {
           ...value,
+          redirect: true,
+          redirectTo: '/settings',
         })
         toast.success('Signed in successfully.')
       } catch (error) {
