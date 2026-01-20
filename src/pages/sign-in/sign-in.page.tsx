@@ -1,4 +1,4 @@
-import { SignInForm } from '@/widgets/auth'
+import { SignInForm } from '@/features/auth/client'
 
 export default function SignInPage() {
   return (

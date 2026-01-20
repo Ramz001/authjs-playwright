@@ -1,4 +1,4 @@
-import { SignUpForm } from '@/widgets/auth'
+import { SignUpForm } from '@/features/auth/client'
 
 export default function SignUpPage() {
   return (
