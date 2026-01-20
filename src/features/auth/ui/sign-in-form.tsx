@@ -17,7 +17,7 @@ import { Input } from '@/shared/ui/input'
 import { Spinner } from '@/shared/ui/spinner'
 import { GithubLoginButton } from './github-login-button'
 import Link from 'next/link'
-import { signIn } from '../api/auth'
+import { signIn } from 'next-auth/react'
 
 export function SignInForm() {
   const form = useForm({
@@ -27,8 +27,6 @@ export function SignInForm() {
     },
     validators: {
       onSubmit: LoginSchema,
-      onBlur: LoginSchema,
-      onChange: LoginSchema,
     },
     onSubmit: async ({ value }) => {
       try {

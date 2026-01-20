@@ -17,6 +17,8 @@ import {
 import { Input } from '@/shared/ui/input'
 import { Spinner } from '@/shared/ui/spinner'
 import { GithubLoginButton } from './github-login-button'
+import { signUpAction } from '../actions/sign-up.action'
+import { signIn } from 'next-auth/react'
 
 export function SignUpForm() {
   const form = useForm({
@@ -28,14 +30,16 @@ export function SignUpForm() {
     },
     validators: {
       onSubmit: SignUpSchema,
-      onBlur: SignUpSchema,
-      onChange: SignUpSchema,
     },
     onSubmit: async ({ value }) => {
       try {
-        // TODO: wire this up to your sign-up endpoint/action
+        await signUpAction(value)
+        await signIn('credentials', {
+          ...value,
+          redirect: true,
+          redirectTo: '/settings',
+        })
         toast.success('Account created! You can now sign in.')
-        console.info('Sign-up submission', value)
       } catch (error) {
         console.error(error)
         toast.error('Unable to sign up right now. Please try again later.')

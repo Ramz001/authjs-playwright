@@ -1,7 +1,39 @@
+'use client'
+
 import { Button } from '@/shared/ui/button'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 
 export default function HomePage() {
+  const { data: session } = useSession()
+
+  const handleSignOut = async () => {
+    await signOut({
+      redirect: false,
+    })
+  }
+
+  if (session) {
+    return (
+      <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
+        <h1 className="text-foreground mb-2 text-4xl font-bold">
+          Welcome back, {session.user?.name || 'User'}! 👋
+        </h1>
+        <h2 className="text-muted-foreground mb-6 text-xl">
+          You are logged in with the email: {session.user?.email}
+        </h2>
+        <section className="flex items-center gap-4">
+          <Button>
+            <Link href={'/settings'}>Go to Settings</Link>
+          </Button>
+          <Button onClick={handleSignOut} variant={'destructive'}>
+            Sign Out
+          </Button>
+        </section>
+      </div>
+    )
+  }
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
       <h1 className="text-foreground mb-2 text-4xl font-bold">Hey there! 👋</h1>
