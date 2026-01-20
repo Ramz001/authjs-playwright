@@ -1,2 +1,3 @@
-import SignUpPage from './ui/sign-up-page'
-export { SignUpPage }
+import SignUpPage from './sign-up.page'
+
+export default SignUpPage

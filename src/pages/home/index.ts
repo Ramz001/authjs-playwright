@@ -1,2 +1,3 @@
-import HomePage from './ui/home-page'
-export { HomePage }
+import HomePage from './home.page'
+
+export default HomePage

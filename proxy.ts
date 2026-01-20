@@ -3,7 +3,7 @@ import { auth } from '@/auth'
 import {
   PROTECTED_ROUTES,
   DEFAULT_UNAUTHENTICATED_REDIRECT,
-} from './features/auth'
+} from '@features/auth/server'
 
 export default auth((req) => {
   const { nextUrl } = req

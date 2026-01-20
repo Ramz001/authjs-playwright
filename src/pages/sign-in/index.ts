@@ -1,3 +1,3 @@
-import SignInPage from './ui/sign-in-page'
+import SignInPage from './sign-in.page'
 
-export { SignInPage }
+export default SignInPage

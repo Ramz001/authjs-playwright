@@ -1,31 +1,31 @@
 /* eslint-disable react/no-children-prop */
-"use client";
+'use client'
 
-import { useForm } from "@tanstack/react-form";
-import Link from "next/link";
-import { toast } from "sonner";
+import { useForm } from '@tanstack/react-form'
+import Link from 'next/link'
+import { toast } from 'sonner'
 
-import { SignUpSchema } from "../models/auth.schema";
-import { Button } from "@/shared/ui/button";
-import { Card, CardContent, CardFooter } from "@/shared/ui/card";
+import { SignUpSchema } from '../models/auth.schema'
+import { Button } from '@/shared/ui/button'
+import { Card, CardContent, CardFooter } from '@/shared/ui/card'
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/shared/ui/field";
-import { Input } from "@/shared/ui/input";
-import { Spinner } from "@/shared/ui/spinner";
-import { GithubLoginButton } from "./github-login-button";
+} from '@/shared/ui/field'
+import { Input } from '@/shared/ui/input'
+import { Spinner } from '@/shared/ui/spinner'
+import { GithubLoginButton } from './github-login-button'
 
 export function SignUpForm() {
   const form = useForm({
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     validators: {
       onSubmit: SignUpSchema,
@@ -33,16 +33,16 @@ export function SignUpForm() {
     onSubmit: async ({ value }) => {
       try {
         // TODO: wire this up to your sign-up endpoint/action
-        toast.success("Account created! You can now sign in.");
-        console.info("Sign-up submission", value);
+        toast.success('Account created! You can now sign in.')
+        console.info('Sign-up submission', value)
       } catch (error) {
-        console.error(error);
-        toast.error("Unable to sign up right now. Please try again later.");
+        console.error(error)
+        toast.error('Unable to sign up right now. Please try again later.')
       }
     },
-  });
+  })
 
-  const isSubmitting = form.state.isSubmitting;
+  const isSubmitting = form.state.isSubmitting
 
   return (
     <Card className="w-full sm:max-w-md">
@@ -50,8 +50,8 @@ export function SignUpForm() {
         <form
           id="sign-up-form"
           onSubmit={(e) => {
-            e.preventDefault();
-            void form.handleSubmit();
+            e.preventDefault()
+            void form.handleSubmit()
           }}
         >
           <FieldGroup className="gap-2">
@@ -59,7 +59,7 @@ export function SignUpForm() {
               name="name"
               children={(field) => {
                 const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
+                  field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Full name</FieldLabel>
@@ -77,7 +77,7 @@ export function SignUpForm() {
                       <FieldError errors={field.state.meta.errors} />
                     )}
                   </Field>
-                );
+                )
               }}
             />
 
@@ -85,7 +85,7 @@ export function SignUpForm() {
               name="email"
               children={(field) => {
                 const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
+                  field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -104,7 +104,7 @@ export function SignUpForm() {
                       <FieldError errors={field.state.meta.errors} />
                     )}
                   </Field>
-                );
+                )
               }}
             />
 
@@ -112,7 +112,7 @@ export function SignUpForm() {
               name="password"
               children={(field) => {
                 const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
+                  field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -134,7 +134,7 @@ export function SignUpForm() {
                       <FieldError errors={field.state.meta.errors} />
                     )}
                   </Field>
-                );
+                )
               }}
             />
 
@@ -142,7 +142,7 @@ export function SignUpForm() {
               name="confirmPassword"
               children={(field) => {
                 const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
+                  field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>
@@ -163,7 +163,7 @@ export function SignUpForm() {
                       <FieldError errors={field.state.meta.errors} />
                     )}
                   </Field>
-                );
+                )
               }}
             />
           </FieldGroup>
@@ -172,7 +172,7 @@ export function SignUpForm() {
       <CardFooter>
         <Field>
           <Button type="submit" form="sign-up-form" disabled={isSubmitting}>
-            {isSubmitting ? <Spinner /> : "Sign up"}
+            {isSubmitting ? <Spinner /> : 'Sign up'}
           </Button>
           <GithubLoginButton />
           <FieldDescription className="text-center">
@@ -181,5 +181,5 @@ export function SignUpForm() {
         </Field>
       </CardFooter>
     </Card>
-  );
+  )
 }

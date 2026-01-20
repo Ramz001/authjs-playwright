@@ -1,48 +1,48 @@
 /* eslint-disable react/no-children-prop */
-"use client";
+'use client'
 
-import { useForm } from "@tanstack/react-form";
-import { signIn } from "next-auth/react";
-import { toast } from "sonner";
+import { useForm } from '@tanstack/react-form'
+import { signIn } from 'next-auth/react'
+import { toast } from 'sonner'
 
-import { LoginSchema } from "../models/auth.schema";
-import { Button } from "@/shared/ui/button";
-import { Card, CardContent, CardFooter } from "@/shared/ui/card";
+import { LoginSchema } from '../models/auth.schema'
+import { Button } from '@/shared/ui/button'
+import { Card, CardContent, CardFooter } from '@/shared/ui/card'
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/shared/ui/field";
-import { Input } from "@/shared/ui/input";
-import { Spinner } from "@/shared/ui/spinner";
-import { GithubLoginButton } from "./github-login-button";
-import Link from "next/link";
+} from '@/shared/ui/field'
+import { Input } from '@/shared/ui/input'
+import { Spinner } from '@/shared/ui/spinner'
+import { GithubLoginButton } from './github-login-button'
+import Link from 'next/link'
 
 export function SignInForm() {
   const form = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validators: {
       onSubmit: LoginSchema,
     },
     onSubmit: async ({ value }) => {
       try {
-        await signIn("credentials", {
+        await signIn('credentials', {
           ...value,
-        });
-        toast.success("Signed in successfully.");
+        })
+        toast.success('Signed in successfully.')
       } catch (error) {
-        console.error(error);
-        toast.error("Unable to sign in right now. Please try again later.");
+        console.error(error)
+        toast.error('Unable to sign in right now. Please try again later.')
       }
     },
-  });
+  })
 
-  const isSubmitting = form.state.isSubmitting;
+  const isSubmitting = form.state.isSubmitting
 
   return (
     <Card className="w-full sm:max-w-md">
@@ -50,8 +50,8 @@ export function SignInForm() {
         <form
           id="sign-in-form"
           onSubmit={(e) => {
-            e.preventDefault();
-            void form.handleSubmit();
+            e.preventDefault()
+            void form.handleSubmit()
           }}
         >
           <FieldGroup className="gap-2">
@@ -59,7 +59,7 @@ export function SignInForm() {
               name="email"
               children={(field) => {
                 const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
+                  field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -78,7 +78,7 @@ export function SignInForm() {
                       <FieldError errors={field.state.meta.errors} />
                     )}
                   </Field>
-                );
+                )
               }}
             />
 
@@ -86,7 +86,7 @@ export function SignInForm() {
               name="password"
               children={(field) => {
                 const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
+                  field.state.meta.isTouched && !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -108,7 +108,7 @@ export function SignInForm() {
                       <FieldError errors={field.state.meta.errors} />
                     )}
                   </Field>
-                );
+                )
               }}
             />
           </FieldGroup>
@@ -117,15 +117,15 @@ export function SignInForm() {
       <CardFooter>
         <Field>
           <Button type="submit" form="sign-in-form" disabled={isSubmitting}>
-            {isSubmitting ? <Spinner /> : "Login"}
+            {isSubmitting ? <Spinner /> : 'Login'}
           </Button>
           <GithubLoginButton />
           <FieldDescription className="text-center">
-            Don&apos;t have an account?{" "}
+            Don&apos;t have an account?{' '}
             <Link href="/auth/sign-up">Sign up</Link>
           </FieldDescription>
         </Field>
       </CardFooter>
     </Card>
-  );
+  )
 }
