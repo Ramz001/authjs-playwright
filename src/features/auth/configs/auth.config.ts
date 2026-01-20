@@ -6,8 +6,17 @@ import GithubProvider from 'next-auth/providers/github'
 import { NextAuthConfig } from 'next-auth'
 import { Role } from '@/shared/generated/prisma/enums'
 import { PROTECTED_ROUTES, ADMIN_ROUTES } from '../consts/auth'
+import { PrismaAdapter } from '@auth/prisma-adapter'
 
 export const authConfig = {
+  adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: 'jwt',
+  },
+  pages: {
+    signIn: '/auth/sign-in',
+    newUser: '/auth/sign-up',
+  },
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID!,

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, DM_Sans } from 'next/font/google'
 import './globals.css'
-import { Toaster } from '@/shared/ui/sonner'
+import RootProvider from '@app/providers/root.provider'
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -30,8 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} dark antialiased`}
       >
-        {children}
-        <Toaster />
+        <RootProvider>{children}</RootProvider>
       </body>
     </html>
   )

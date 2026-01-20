@@ -1,11 +1,10 @@
 /* eslint-disable react/no-children-prop */
 'use client'
 
-import { useForm } from '@tanstack/react-form'
 import Link from 'next/link'
+import { useForm } from '@tanstack/react-form'
 import { toast } from 'sonner'
-
-import { SignUpSchema } from '../models/auth.schema'
+import { SignUpSchema } from '@features/auth/client'
 import { Button } from '@/shared/ui/button'
 import { Card, CardContent, CardFooter } from '@/shared/ui/card'
 import {

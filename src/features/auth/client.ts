@@ -1,2 +1,6 @@
-export { SignInForm } from './ui/sign-in-form'
-export { SignUpForm } from './ui/sign-up-form'
+export {
+  LoginSchema,
+  SignUpSchema,
+  type SignUpSchemaType,
+  type LoginSchemaType,
+} from './models/auth.schema'
