@@ -1,6 +1,5 @@
 'use server'
 
-import { auth } from '@/features/auth/server'
 import prisma from '@/shared/lib/prisma'
 import {
   withActionErrorHandler,
@@ -11,21 +10,18 @@ import {
   type EditProfileSchemaType,
 } from '../schemas/profile.schema'
 import type { Session } from 'next-auth'
+import { requireAuth } from '@shared/server/auth.guard'
 
 export const editProfileAction = async (
   values: EditProfileSchemaType
 ): Promise<ActionResponse<Session['user']>> =>
   withActionErrorHandler(async () => {
-    const session = await auth()
-
-    if (!session?.user?.id) {
-      throw new Error('Unauthorized')
-    }
+    const user = await requireAuth()
 
     const { name, email } = await EditProfileSchema.parseAsync(values)
 
     const updatedUser = await prisma.user.update({
-      where: { id: session.user.id },
+      where: { id: user.id },
       data: {
         name,
         email,

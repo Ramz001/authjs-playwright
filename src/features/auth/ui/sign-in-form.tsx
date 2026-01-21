@@ -26,6 +26,7 @@ import { signIn } from 'next-auth/react'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { handleError } from '@shared/client/handle-error'
 
 export function SignInForm() {
   const router = useRouter()
@@ -54,8 +55,7 @@ export function SignInForm() {
         toast.success('Signed in successfully.')
         router.push('/settings')
       } catch (error) {
-        console.error(error)
-        toast.error('Unable to sign in right now. Please try again later.')
+        handleError(error)
       }
     },
   })

@@ -26,6 +26,7 @@ import { signUpAction } from '../actions/sign-up.action'
 import { signIn } from 'next-auth/react'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
+import { handleError } from '@shared/client/handle-error'
 
 export function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false)
@@ -52,8 +53,7 @@ export function SignUpForm() {
         })
         toast.success('Account created! You can now sign in.')
       } catch (error) {
-        console.error(error)
-        toast.error('Unable to sign up right now. Please try again later.')
+        handleError(error)
       }
     },
   })

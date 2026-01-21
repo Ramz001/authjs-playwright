@@ -18,6 +18,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from '@/shared/ui/field'
 import { Spinner } from '@/shared/ui/spinner'
 import { editProfileAction } from '../actions/edit-profile.action'
 import { EditProfileSchema } from '../schemas/profile.schema'
+import { handleError } from '@shared/client/handle-error'
 
 export function ProfileEditForm() {
   const { data: session, update } = useSession()
@@ -46,8 +47,7 @@ export function ProfileEditForm() {
 
         toast.success('Profile updated successfully')
       } catch (error) {
-        console.error(error)
-        toast.error('Unable to update profile. Please try again later.')
+        handleError(error)
       }
     },
   })

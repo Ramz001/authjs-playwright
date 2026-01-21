@@ -1,9 +1,14 @@
 import { Button } from '@/shared/ui/button'
+import { handleError } from '@shared/client/handle-error'
 import { signIn } from 'next-auth/react'
 
 export const GithubLoginButton = () => {
   const handleLogin = async () => {
-    await signIn('github', { redirect: true, redirectTo: '/settings' })
+    try {
+      await signIn('github', { redirect: true, redirectTo: '/settings' })
+    } catch (error) {
+      handleError(error)
+    }
   }
 
   return (

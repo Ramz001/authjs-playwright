@@ -26,6 +26,7 @@ import { Spinner } from '@/shared/ui/spinner'
 import { updateUserRoleAction } from '../actions/update-role.action'
 import { UpdateRoleSchema } from '../schemas/profile.schema'
 import { role, RoleType } from '@shared/schemas/primitive.schema'
+import { handleError } from '@shared/client/handle-error'
 
 export function AdminRoleManager() {
   const form = useForm({
@@ -48,8 +49,7 @@ export function AdminRoleManager() {
         toast.success(`User role updated to ${value.role}`)
         form.reset()
       } catch (error) {
-        console.error(error)
-        toast.error('Unable to update user role. Please try again later.')
+        handleError(error)
       }
     },
   })

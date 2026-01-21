@@ -17,7 +17,7 @@ export default function HomePage() {
 
   if (session) {
     return (
-      <Gutter className="min-h-screen flex-col items-center justify-center gap-4">
+      <Gutter className="flex min-h-screen flex-col items-center justify-center gap-4">
         <h1 className="text-foreground mb-2 text-4xl font-bold">
           Welcome back, {session.user?.name || 'User'}! 👋
         </h1>

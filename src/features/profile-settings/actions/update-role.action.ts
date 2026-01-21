@@ -1,6 +1,5 @@
 'use server'
 
-import { auth } from '@/features/auth/server'
 import prisma from '@/shared/lib/prisma'
 import {
   withActionErrorHandler,
@@ -12,17 +11,13 @@ import {
   type UpdateRoleSchemaType,
 } from '../schemas/profile.schema'
 import type { Session } from 'next-auth'
+import { requireAdmin } from '@shared/server/auth.guard'
 
 export const updateUserRoleAction = async (
   values: UpdateRoleSchemaType
 ): Promise<ActionResponse<Session['user']>> =>
   withActionErrorHandler(async () => {
-    const session = await auth()
-
-    // Check if user is admin
-    if (!session?.user?.id || session.user.role !== Role.ADMIN) {
-      throw new Error('Unauthorized - Admin access required')
-    }
+    await requireAdmin()
 
     const { email, role } = await UpdateRoleSchema.parseAsync(values)
 
