@@ -249,7 +249,7 @@ export type AuthenticatorWhereInput = {
   credentialDeviceType?: Prisma.StringFilter<'Authenticator'> | string
   credentialBackedUp?: Prisma.BoolFilter<'Authenticator'> | boolean
   transports?: Prisma.StringNullableFilter<'Authenticator'> | string | null
-  User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type AuthenticatorOrderByWithRelationInput = {
@@ -261,7 +261,7 @@ export type AuthenticatorOrderByWithRelationInput = {
   credentialDeviceType?: Prisma.SortOrder
   credentialBackedUp?: Prisma.SortOrder
   transports?: Prisma.SortOrderInput | Prisma.SortOrder
-  User?: Prisma.UserOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type AuthenticatorWhereUniqueInput = Prisma.AtLeast<
@@ -278,7 +278,7 @@ export type AuthenticatorWhereUniqueInput = Prisma.AtLeast<
     credentialDeviceType?: Prisma.StringFilter<'Authenticator'> | string
     credentialBackedUp?: Prisma.BoolFilter<'Authenticator'> | boolean
     transports?: Prisma.StringNullableFilter<'Authenticator'> | string | null
-    User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+    user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   },
   'userId_credentialID' | 'credentialID'
 >
@@ -336,7 +336,7 @@ export type AuthenticatorCreateInput = {
   credentialDeviceType: string
   credentialBackedUp: boolean
   transports?: string | null
-  User: Prisma.UserCreateNestedOneWithoutAuthenticatorInput
+  user: Prisma.UserCreateNestedOneWithoutAuthenticatorInput
 }
 
 export type AuthenticatorUncheckedCreateInput = {
@@ -358,7 +358,7 @@ export type AuthenticatorUpdateInput = {
   credentialDeviceType?: Prisma.StringFieldUpdateOperationsInput | string
   credentialBackedUp?: Prisma.BoolFieldUpdateOperationsInput | boolean
   transports?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  User?: Prisma.UserUpdateOneRequiredWithoutAuthenticatorNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutAuthenticatorNestedInput
 }
 
 export type AuthenticatorUncheckedUpdateInput = {
@@ -716,7 +716,7 @@ export type AuthenticatorSelect<
     credentialDeviceType?: boolean
     credentialBackedUp?: boolean
     transports?: boolean
-    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['authenticator']
 >
@@ -734,7 +734,7 @@ export type AuthenticatorSelectCreateManyAndReturn<
     credentialDeviceType?: boolean
     credentialBackedUp?: boolean
     transports?: boolean
-    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['authenticator']
 >
@@ -752,7 +752,7 @@ export type AuthenticatorSelectUpdateManyAndReturn<
     credentialDeviceType?: boolean
     credentialBackedUp?: boolean
     transports?: boolean
-    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['authenticator']
 >
@@ -786,19 +786,19 @@ export type AuthenticatorInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type AuthenticatorIncludeCreateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type AuthenticatorIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $AuthenticatorPayload<
@@ -807,7 +807,7 @@ export type $AuthenticatorPayload<
 > = {
   name: 'Authenticator'
   objects: {
-    User: Prisma.$UserPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1375,7 +1375,7 @@ export interface Prisma__AuthenticatorClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise'
-  User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>
   ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<

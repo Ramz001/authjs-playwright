@@ -186,7 +186,7 @@ export type SessionWhereInput = {
   expires?: Prisma.DateTimeFilter<'Session'> | Date | string
   createdAt?: Prisma.DateTimeFilter<'Session'> | Date | string
   updatedAt?: Prisma.DateTimeFilter<'Session'> | Date | string
-  User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type SessionOrderByWithRelationInput = {
@@ -195,7 +195,7 @@ export type SessionOrderByWithRelationInput = {
   expires?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  User?: Prisma.UserOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type SessionWhereUniqueInput = Prisma.AtLeast<
@@ -208,7 +208,7 @@ export type SessionWhereUniqueInput = Prisma.AtLeast<
     expires?: Prisma.DateTimeFilter<'Session'> | Date | string
     createdAt?: Prisma.DateTimeFilter<'Session'> | Date | string
     updatedAt?: Prisma.DateTimeFilter<'Session'> | Date | string
-    User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+    user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   },
   'sessionToken'
 >
@@ -243,8 +243,8 @@ export type SessionCreateInput = {
   sessionToken: string
   expires: Date | string
   createdAt?: Date | string
-  updatedAt: Date | string
-  User: Prisma.UserCreateNestedOneWithoutSessionInput
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutSessionInput
 }
 
 export type SessionUncheckedCreateInput = {
@@ -252,7 +252,7 @@ export type SessionUncheckedCreateInput = {
   userId: string
   expires: Date | string
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SessionUpdateInput = {
@@ -260,7 +260,7 @@ export type SessionUpdateInput = {
   expires?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  User?: Prisma.UserUpdateOneRequiredWithoutSessionNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSessionNestedInput
 }
 
 export type SessionUncheckedUpdateInput = {
@@ -276,7 +276,7 @@ export type SessionCreateManyInput = {
   userId: string
   expires: Date | string
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SessionUpdateManyMutationInput = {
@@ -418,14 +418,14 @@ export type SessionCreateWithoutUserInput = {
   sessionToken: string
   expires: Date | string
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SessionUncheckedCreateWithoutUserInput = {
   sessionToken: string
   expires: Date | string
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SessionCreateOrConnectWithoutUserInput = {
@@ -484,7 +484,7 @@ export type SessionCreateManyUserInput = {
   sessionToken: string
   expires: Date | string
   createdAt?: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type SessionUpdateWithoutUserInput = {
@@ -518,7 +518,7 @@ export type SessionSelect<
     expires?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['session']
 >
@@ -533,7 +533,7 @@ export type SessionSelectCreateManyAndReturn<
     expires?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['session']
 >
@@ -548,7 +548,7 @@ export type SessionSelectUpdateManyAndReturn<
     expires?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   },
   ExtArgs['result']['session']
 >
@@ -572,19 +572,19 @@ export type SessionInclude<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type SessionIncludeCreateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type SessionIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $SessionPayload<
@@ -593,7 +593,7 @@ export type $SessionPayload<
 > = {
   name: 'Session'
   objects: {
-    User: Prisma.$UserPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1152,7 +1152,7 @@ export interface Prisma__SessionClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: 'PrismaPromise'
-  User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>
   ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<
