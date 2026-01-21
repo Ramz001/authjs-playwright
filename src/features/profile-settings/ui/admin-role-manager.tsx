@@ -118,7 +118,7 @@ export function AdminRoleManager() {
                       <SelectContent>
                         <SelectItem value="USER">
                           <div className="flex items-center gap-2">
-                            <Badge variant="secondary">{role.enum.USER}</Badge>
+                            <Badge>{role.enum.USER}</Badge>
                             <span className="text-muted-foreground text-xs">
                               Standard user
                             </span>
@@ -126,9 +126,7 @@ export function AdminRoleManager() {
                         </SelectItem>
                         <SelectItem value="ADMIN">
                           <div className="flex items-center gap-2">
-                            <Badge variant="destructive">
-                              {role.enum.ADMIN}
-                            </Badge>
+                            <Badge variant="outline">{role.enum.ADMIN}</Badge>
                             <span className="text-muted-foreground text-xs">
                               Full access
                             </span>
