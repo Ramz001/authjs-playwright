@@ -4,6 +4,7 @@ import { Button } from '@/shared/ui/button'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { signOut } from 'next-auth/react'
+import Gutter from '@shared/ui/gutter'
 
 export default function HomePage() {
   const { data: session } = useSession()
@@ -16,7 +17,7 @@ export default function HomePage() {
 
   if (session) {
     return (
-      <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
+      <Gutter className="min-h-screen flex-col items-center justify-center gap-4">
         <h1 className="text-foreground mb-2 text-4xl font-bold">
           Welcome back, {session.user?.name || 'User'}! 👋
         </h1>
@@ -31,12 +32,12 @@ export default function HomePage() {
             Sign Out
           </Button>
         </section>
-      </div>
+      </Gutter>
     )
   }
 
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
+    <Gutter className="flex min-h-screen flex-col items-center justify-center gap-4">
       <h1 className="text-foreground mb-2 text-4xl font-bold">Hey there! 👋</h1>
       <h2 className="text-muted-foreground mb-6 text-xl">
         Welcome to our Auth Demo
@@ -44,6 +45,6 @@ export default function HomePage() {
       <Button>
         <Link href={'/auth/sign-in'}>Get Started with Authentication</Link>
       </Button>
-    </div>
+    </Gutter>
   )
 }
