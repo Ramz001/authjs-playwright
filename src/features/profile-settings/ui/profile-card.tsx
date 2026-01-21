@@ -81,7 +81,10 @@ export async function ProfileCard() {
           <InfoItem
             label="Session Status"
             value={
-              <Badge variant="default" className="bg-green-600">
+              <Badge
+                variant="default"
+                className="bg-green-500/10 text-green-500"
+              >
                 Active
               </Badge>
             }
