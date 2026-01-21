@@ -19,4 +19,6 @@ export const signUpAction = async (values: SignUpSchemaType) =>
         updatedAt: new Date(),
       },
     })
+
+    return { success: true, data: null }
   })

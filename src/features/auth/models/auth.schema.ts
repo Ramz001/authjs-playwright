@@ -1,7 +1,5 @@
 import z from 'zod'
-
-const password = z.string().min(6)
-const email = z.email()
+import { password, email, name } from '@shared/models/primitive.schema'
 
 export const LoginSchema = z.object({
   email,
@@ -10,11 +8,7 @@ export const LoginSchema = z.object({
 
 export const SignUpSchema = z
   .object({
-    name: z
-      .string()
-      .trim()
-      .min(2, 'Name must be at least 2 characters')
-      .max(50, 'Name must be at most 50 characters'),
+    name,
     email,
     password,
     confirmPassword: password,

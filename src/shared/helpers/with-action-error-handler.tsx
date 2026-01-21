@@ -1,16 +1,19 @@
 'use server'
 
-import { ZodError, ZodIssue } from 'zod'
+import { ZodError } from 'zod'
+import z from 'zod'
 
 export type ActionResponse<T = void> =
   | { success: true; data: T }
   | {
       success: false
       error: string
-      issues?: Array<ZodIssue>
+      issues?: Array<z.core.$ZodIssue>
     }
 
-export async function withActionErrorHandler<T>(fn: () => Promise<T>) {
+export async function withActionErrorHandler<T>(
+  fn: () => Promise<{ success: true; data: T }>
+): Promise<ActionResponse<T>> {
   try {
     return await fn()
   } catch (error) {

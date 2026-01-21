@@ -34,6 +34,7 @@ export default function HomePage() {
       </div>
     )
   }
+
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
       <h1 className="text-foreground mb-2 text-4xl font-bold">Hey there! 👋</h1>
