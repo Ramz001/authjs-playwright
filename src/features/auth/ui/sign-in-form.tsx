@@ -1,7 +1,7 @@
 /* eslint-disable react/no-children-prop */
 'use client'
 
-import { LoginSchema } from '../models/auth.schema'
+import { LoginSchema } from '../schemas/auth.schema'
 import { useForm } from '@tanstack/react-form'
 import { toast } from 'sonner'
 import { Button } from '@/shared/ui/button'

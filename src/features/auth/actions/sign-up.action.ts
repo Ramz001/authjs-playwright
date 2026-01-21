@@ -2,8 +2,8 @@
 
 import prisma from '@shared/lib/prisma'
 import bcrypt from 'bcryptjs'
-import { SignUpSchema, type SignUpSchemaType } from '../models/auth.schema'
-import { withActionErrorHandler } from '@shared/helpers/with-action-error-handler'
+import { SignUpSchema, type SignUpSchemaType } from '../schemas/auth.schema'
+import { withActionErrorHandler } from '@shared/server/with-action-error-handler'
 
 export const signUpAction = async (values: SignUpSchemaType) =>
   withActionErrorHandler(async () => {

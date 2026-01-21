@@ -17,7 +17,7 @@ import { Input } from '@/shared/ui/input'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/shared/ui/field'
 import { Spinner } from '@/shared/ui/spinner'
 import { editProfileAction } from '../actions/edit-profile.action'
-import { EditProfileSchema } from '../models/profile.schema'
+import { EditProfileSchema } from '../schemas/profile.schema'
 
 export function ProfileEditForm() {
   const { data: session, update } = useSession()

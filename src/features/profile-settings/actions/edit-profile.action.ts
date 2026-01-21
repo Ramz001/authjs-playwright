@@ -5,11 +5,11 @@ import prisma from '@/shared/lib/prisma'
 import {
   withActionErrorHandler,
   type ActionResponse,
-} from '@/shared/helpers/with-action-error-handler'
+} from '@/shared/server/with-action-error-handler'
 import {
   EditProfileSchema,
   type EditProfileSchemaType,
-} from '../models/profile.schema'
+} from '../schemas/profile.schema'
 import type { Session } from 'next-auth'
 
 export const editProfileAction = async (

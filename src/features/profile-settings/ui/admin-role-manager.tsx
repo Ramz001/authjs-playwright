@@ -24,8 +24,8 @@ import { Field, FieldError, FieldGroup, FieldLabel } from '@/shared/ui/field'
 import { Badge } from '@/shared/ui/badge'
 import { Spinner } from '@/shared/ui/spinner'
 import { updateUserRoleAction } from '../actions/update-role.action'
-import { UpdateRoleSchema } from '../models/profile.schema'
-import { role, RoleType } from '@shared/models/primitive.schema'
+import { UpdateRoleSchema } from '../schemas/profile.schema'
+import { role, RoleType } from '@shared/schemas/primitive.schema'
 
 export function AdminRoleManager() {
   const form = useForm({

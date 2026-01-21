@@ -1,7 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
 import prisma from '@/shared/lib/prisma'
-import { LoginSchema } from '../models/auth.schema'
+import { LoginSchema } from '../schemas/auth.schema'
 import GithubProvider from 'next-auth/providers/github'
 import { NextAuthConfig } from 'next-auth'
 import { Role } from '@/shared/generated/prisma/enums'

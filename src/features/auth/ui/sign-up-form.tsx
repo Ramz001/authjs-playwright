@@ -4,7 +4,7 @@
 import Link from 'next/link'
 import { useForm } from '@tanstack/react-form'
 import { toast } from 'sonner'
-import { SignUpSchema } from '../models/auth.schema'
+import { SignUpSchema } from '../schemas/auth.schema'
 import { Button } from '@/shared/ui/button'
 import { Card, CardContent, CardFooter } from '@/shared/ui/card'
 import {

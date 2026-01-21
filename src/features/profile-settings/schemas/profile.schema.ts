@@ -1,5 +1,5 @@
 import z from 'zod'
-import { email, name, role } from '@shared/models/primitive.schema'
+import { email, name, role } from '@shared/schemas/primitive.schema'
 
 export const EditProfileSchema = z.object({
   name,

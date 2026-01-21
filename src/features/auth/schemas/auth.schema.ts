@@ -1,5 +1,5 @@
 import z from 'zod'
-import { password, email, name } from '@shared/models/primitive.schema'
+import { password, email, name } from '@shared/schemas/primitive.schema'
 
 export const LoginSchema = z.object({
   email,
