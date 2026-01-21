@@ -2,7 +2,7 @@ import { Role } from '@shared/generated/prisma/enums'
 import z from 'zod'
 
 export const password = z.string().min(6)
-export const email = z.email()
+export const email = z.email({ error: 'Invalid email address' })
 export const name = z
   .string()
   .trim()
