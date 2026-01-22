@@ -25,11 +25,9 @@ import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { handleError } from '@shared/client/handle-error'
 
 export function SignInForm() {
-  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
 
   const form = useForm({
@@ -42,18 +40,13 @@ export function SignInForm() {
     },
     onSubmit: async ({ value }) => {
       try {
-        const res = await signIn('credentials', {
+        await signIn('credentials', {
           ...value,
-          redirect: false,
+          redirect: true,
+          redirectTo: '/settings',
         })
 
-        if (res?.error) {
-          new Error(res.error)
-          return
-        }
-
         toast.success('Signed in successfully.')
-        router.push('/settings')
       } catch (error) {
         handleError(error)
       }
