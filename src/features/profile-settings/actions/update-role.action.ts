@@ -11,7 +11,7 @@ import {
   type UpdateRoleSchemaType,
 } from '../schemas/profile.schema'
 import type { Session } from 'next-auth'
-import { requireAdmin } from '@shared/server/auth.guard'
+import { requireAdmin } from '@features/auth/server'
 
 export const updateUserRoleAction = async (
   values: UpdateRoleSchemaType

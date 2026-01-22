@@ -2,7 +2,7 @@ import { ProfileCard } from '@features/profile-settings'
 import { ProfileEditForm } from '@/features/profile-settings/ui/profile-edit-form'
 import { AdminRoleManager } from '@/features/profile-settings/ui/admin-role-manager'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@shared/ui/tabs'
-import { requireAuth } from '@shared/server/auth.guard'
+import { requireAuth } from '@features/auth/server'
 import { Role } from '@shared/generated/prisma/enums'
 
 export async function SettingsTabs() {

@@ -1,5 +1,5 @@
 import Gutter from '@shared/ui/gutter'
-import { SettingsTabs } from '@widgets/profile-settings'
+import { SettingsTabs } from '@widgets/settings-tabs'
 
 export default async function SettingsPage() {
   return (

@@ -11,7 +11,7 @@ import { checkRouteAccess } from '../lib/check-route-access'
 export const authConfig = {
   adapter: PrismaAdapter(prisma),
   session: {
-    strategy: 'jwt',
+    strategy: 'database',
   },
   pages: {
     signIn: '/auth/sign-in',
@@ -75,19 +75,12 @@ export const authConfig = {
       }
       return false
     },
-    jwt({ token, user, trigger, session }) {
+    // With database sessions, we receive user directly from DB
+    async session({ session, user }) {
       if (user) {
-        token.id = user.id as string
-        token.role = user.role
+        session.user.id = user.id
+        session.user.role = user.role as Role
       }
-      if (trigger === 'update' && session) {
-        token = { ...token, ...session }
-      }
-      return token
-    },
-    session({ session, token }) {
-      session.user.id = token.id as string
-      session.user.role = token.role as Role
       return session
     },
   },

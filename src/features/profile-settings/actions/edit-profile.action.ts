@@ -10,7 +10,7 @@ import {
   type EditProfileSchemaType,
 } from '../schemas/profile.schema'
 import type { Session } from 'next-auth'
-import { requireAuth } from '@shared/server/auth.guard'
+import { requireAuth } from '@features/auth/server'
 
 export const editProfileAction = async (
   values: EditProfileSchemaType
