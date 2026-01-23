@@ -26,9 +26,12 @@ import { signIn } from 'next-auth/react'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { handleError } from '@shared/client/handle-error'
+import { useRouter } from 'next/navigation'
+import { mapAuthErrorMessage } from '../lib/map-authjs-error'
 
 export function SignInForm() {
   const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter()
 
   const form = useForm({
     defaultValues: {
@@ -40,13 +43,17 @@ export function SignInForm() {
     },
     onSubmit: async ({ value }) => {
       try {
-        await signIn('credentials', {
+        const res = await signIn('credentials', {
           ...value,
-          redirect: true,
-          redirectTo: '/settings',
+          redirect: false,
         })
 
+        if (res?.error) {
+          mapAuthErrorMessage(res.error)
+        }
+
         toast.success('Signed in successfully.')
+        router.push('/settings')
       } catch (error) {
         handleError(error)
       }

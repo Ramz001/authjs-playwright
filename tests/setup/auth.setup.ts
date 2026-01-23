@@ -3,7 +3,7 @@ import { chromium } from '@playwright/test' // For browser automation
 import path from 'path' // For handling file paths
 import dotenv from 'dotenv' // For environment variables
 import { JWT } from 'next-auth/jwt' // For handling JWT tokens
-import { getSessionToken } from '../utils/get-session-token'
+import { getSessionToken } from '../utils/get-session-token.util'
 import { Role } from '@shared/generated/prisma/enums'
 
 // Load environment variables
