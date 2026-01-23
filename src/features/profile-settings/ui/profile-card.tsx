@@ -78,17 +78,6 @@ export async function ProfileCard() {
             label="Profile Image"
             value={user.image ? 'Set' : 'Not set'}
           />
-          <InfoItem
-            label="Session Status"
-            value={
-              <Badge
-                variant="default"
-                className="bg-green-500/10 text-green-500"
-              >
-                Active
-              </Badge>
-            }
-          />
         </div>
 
         {user.email && (
