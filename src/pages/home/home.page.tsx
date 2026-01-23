@@ -1,19 +1,11 @@
-'use client'
-
 import { Button } from '@/shared/ui/button'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
-import { signOut } from 'next-auth/react'
 import Gutter from '@shared/ui/gutter'
+import { auth } from '@features/auth/server'
+import { SignOutButton } from '@features/auth/client'
 
-export default function HomePage() {
-  const { data: session } = useSession()
-
-  const handleSignOut = async () => {
-    await signOut({
-      redirect: false,
-    })
-  }
+export default async function HomePage() {
+  const session = await auth()
 
   if (session) {
     return (
@@ -28,9 +20,7 @@ export default function HomePage() {
           <Button>
             <Link href={'/settings'}>Go to Settings</Link>
           </Button>
-          <Button onClick={handleSignOut} variant={'destructive'}>
-            Sign Out
-          </Button>
+          <SignOutButton />
         </section>
       </Gutter>
     )

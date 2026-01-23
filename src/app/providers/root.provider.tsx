@@ -1,5 +1,6 @@
 import ToastProvider from './toast.provider'
 import AuthSessionProvider from './session.provider'
+import ThemeProvider from './theme.provider'
 
 export default function RootProvider({
   children,
@@ -8,7 +9,9 @@ export default function RootProvider({
 }) {
   return (
     <AuthSessionProvider>
-      <ToastProvider>{children}</ToastProvider>
+      <ThemeProvider>
+        <ToastProvider>{children}</ToastProvider>
+      </ThemeProvider>
     </AuthSessionProvider>
   )
 }
