@@ -1,2 +1,1 @@
-import SettingsPage from './settings.page'
-export default SettingsPage
+export { default } from './page'

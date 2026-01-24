@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { auth } from '@/features/auth/server'
-import { checkRouteAccess } from '@/features/auth/server'
+import { auth } from '@shared/api/auth'
+import { checkRouteAccess } from '@shared/utils/check-route-access'
 
 export default auth((req) => {
   const { pathname } = req.nextUrl
