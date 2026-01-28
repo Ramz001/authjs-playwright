@@ -6,7 +6,6 @@ import GithubProvider from 'next-auth/providers/github'
 import { NextAuthConfig } from 'next-auth'
 import { Role } from '@/shared/generated/prisma/enums'
 import { PrismaAdapter } from '@auth/prisma-adapter'
-import { checkRouteAccess } from '@shared/utils/check-route-access'
 
 export const authConfig = {
   adapter: PrismaAdapter(prisma),
@@ -51,29 +50,6 @@ export const authConfig = {
     }),
   ],
   callbacks: {
-    authorized({ request: { nextUrl }, auth }) {
-      const { pathname } = nextUrl
-
-      const routeAccess = checkRouteAccess(pathname, auth?.user)
-
-      if (routeAccess.success) {
-        return true
-      }
-
-      if (routeAccess.reason === 'unauthenticated') {
-        return Response.redirect(new URL('/auth/sign-in', nextUrl))
-      }
-
-      if (routeAccess.reason === 'unauthorized') {
-        return Response.redirect(new URL('/', nextUrl))
-      }
-
-      if (auth?.user?.emailVerified === null) {
-        return Response.redirect(new URL('/auth/verify-email', nextUrl))
-      }
-
-      return false
-    },
     // With database sessions, we receive user directly from DB
     jwt({ token, user, trigger, session }) {
       if (user) {

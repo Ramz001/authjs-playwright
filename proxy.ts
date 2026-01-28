@@ -10,10 +10,14 @@ export default auth((req) => {
   if (!routeAccess.success) {
     return NextResponse.redirect(
       new URL(
-        routeAccess.reason === 'unauthenticated' ? '/' : '/403',
+        routeAccess.reason === 'unauthenticated' ? '/auth/sign-in' : '/',
         req.nextUrl
       )
     )
+  }
+
+  if (user?.emailVerified === null && pathname !== '/auth/verify-email') {
+    return NextResponse.redirect(new URL('/auth/verify-email', req.nextUrl))
   }
 })
 

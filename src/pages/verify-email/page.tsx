@@ -1,11 +1,19 @@
+import Gutter from '@shared/ui/gutter'
+import { VerifyEmailForm } from './ui/verify-email-form'
+
 export default function VerifyEmailPage() {
   return (
-    <div>
-      <h1>Verify Your Email</h1>
-      <p>
-        A verification link has been sent to your email address. Please check
-        your inbox and click the link to verify your email.
-      </p>
-    </div>
+    <Gutter className="flex min-h-screen flex-col items-center justify-center gap-4">
+      <header className="max-w-md space-y-1 text-center">
+        <h1 className="text-foreground text-3xl font-semibold">
+          Verify Your Email
+        </h1>
+        <p className="text-muted-foreground text-sm">
+          Please verify your email address to complete your registration and
+          access all features
+        </p>
+      </header>
+      <VerifyEmailForm />
+    </Gutter>
   )
 }
