@@ -5,7 +5,6 @@ import {
   withActionErrorHandler,
   type ActionResponse,
 } from '@/shared/api/with-action-error-handler'
-import { Role } from '@/shared/generated/prisma/enums'
 import {
   UpdateRoleSchema,
   type UpdateRoleSchemaType,
@@ -23,13 +22,7 @@ export const updateUserRoleAction = async (
 
     const updatedUser = await prisma.user.update({
       where: { email },
-      data: { role: role as Role },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-      },
+      data: { role },
     })
 
     return { success: true, data: updatedUser }

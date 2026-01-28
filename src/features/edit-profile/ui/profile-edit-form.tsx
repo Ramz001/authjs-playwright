@@ -39,9 +39,7 @@ export function ProfileEditForm() {
           throw new Error(result.error || 'Failed to update profile')
         }
 
-        await update({
-          user: result.data,
-        })
+        await update(result.data)
 
         toast.success('Profile updated successfully')
       } catch (error) {

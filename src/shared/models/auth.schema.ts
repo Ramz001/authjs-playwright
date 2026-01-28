@@ -20,4 +20,3 @@ export const SignUpSchema = z
   })
 
 export type SignUpSchemaType = z.infer<typeof SignUpSchema>
-

@@ -5,7 +5,6 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { Tabs as TabsPrimitive } from 'radix-ui'
 import { cn } from '@shared/utils/cn'
 
-
 function Tabs({
   className,
   orientation = 'horizontal',

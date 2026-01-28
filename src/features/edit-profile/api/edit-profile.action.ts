@@ -26,13 +26,6 @@ export const editProfileAction = async (
         name,
         email,
       },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        image: true,
-      },
     })
 
     return { success: true, data: updatedUser }

@@ -15,11 +15,11 @@ import type * as Prisma from './prismaNamespace'
 
 const config: runtime.GetPrismaClientConfig = {
   previewFeatures: [],
-  clientVersion: '7.2.0',
-  engineVersion: '0c8ef2ce45c83248ab3df073180d5eda9e8be7a3',
+  clientVersion: '7.3.0',
+  engineVersion: '9d6ad21cbbceab97458517b147a6a09ff43aa735',
   activeProvider: 'postgresql',
   inlineSchema:
-    'generator client {\n  provider = "prisma-client"\n  output   = "../src/shared/generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel Account {\n  userId            String\n  type              String\n  provider          String\n  providerAccountId String\n  refresh_token     String?\n  access_token      String?\n  expires_at        Int?\n  token_type        String?\n  scope             String?\n  id_token          String?\n  session_state     String?\n  createdAt         DateTime @default(now())\n  updatedAt         DateTime @updatedAt\n  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@id([provider, providerAccountId])\n}\n\nmodel Authenticator {\n  credentialID         String  @unique\n  userId               String\n  providerAccountId    String\n  credentialPublicKey  String\n  counter              Int\n  credentialDeviceType String\n  credentialBackedUp   Boolean\n  transports           String?\n  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@id([userId, credentialID])\n}\n\nmodel Session {\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel User {\n  id            String          @id @default(cuid())\n  name          String?\n  email         String?         @unique\n  emailVerified DateTime?\n  image         String?\n  createdAt     DateTime        @default(now())\n  updatedAt     DateTime        @updatedAt\n  password      String?\n  role          Role            @default(USER)\n  Account       Account[]\n  Authenticator Authenticator[]\n  Session       Session[]\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String\n  expires    DateTime\n\n  @@id([identifier, token])\n}\n\nenum Role {\n  USER\n  ADMIN\n}\n',
+    'generator client {\n  provider = "prisma-client"\n  output   = "../src/shared/generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel Account {\n  userId            String\n  type              String\n  provider          String\n  providerAccountId String\n  refresh_token     String?\n  access_token      String?\n  expires_at        Int?\n  token_type        String?\n  scope             String?\n  id_token          String?\n  session_state     String?\n  createdAt         DateTime @default(now())\n  updatedAt         DateTime @updatedAt\n  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@id([provider, providerAccountId])\n}\n\nmodel Authenticator {\n  credentialID         String  @unique\n  userId               String\n  providerAccountId    String\n  credentialPublicKey  String\n  counter              Int\n  credentialDeviceType String\n  credentialBackedUp   Boolean\n  transports           String?\n  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@id([userId, credentialID])\n}\n\nmodel Session {\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel User {\n  id            String          @id @default(cuid())\n  name          String\n  email         String          @unique\n  emailVerified DateTime?\n  image         String?\n  createdAt     DateTime        @default(now())\n  updatedAt     DateTime        @updatedAt\n  password      String?\n  role          Role            @default(USER)\n  Account       Account[]\n  Authenticator Authenticator[]\n  Session       Session[]\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String\n  expires    DateTime\n\n  @@id([identifier, token])\n}\n\nenum Role {\n  USER\n  ADMIN\n}\n',
   runtimeDataModel: {
     models: {},
     enums: {},
@@ -41,13 +41,15 @@ async function decodeBase64AsWasm(
 
 config.compilerWasm = {
   getRuntime: async () =>
-    await import('@prisma/client/runtime/query_compiler_bg.postgresql.mjs'),
+    await import('@prisma/client/runtime/query_compiler_fast_bg.postgresql.mjs'),
 
   getQueryCompilerWasmModule: async () => {
     const { wasm } =
-      await import('@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.mjs')
+      await import('@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.mjs')
     return await decodeBase64AsWasm(wasm)
   },
+
+  importName: './query_compiler_fast_bg.js',
 }
 
 export type LogOptions<ClientOptions extends Prisma.PrismaClientOptions> =

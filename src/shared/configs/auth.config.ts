@@ -21,6 +21,7 @@ export const authConfig = {
     GithubProvider({
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
+      allowDangerousEmailAccountLinking: true,
     }),
     CredentialsProvider({
       name: 'credentials',
@@ -30,16 +31,9 @@ export const authConfig = {
       },
       async authorize(credentials) {
         try {
-          const validated = LoginSchema.safeParse(credentials)
+          const { email, password } = LoginSchema.parse(credentials)
 
-          if (!validated.success) {
-            console.warn(validated.error.issues, 'Invalid credentials input:')
-            return null
-          }
-
-          const { email, password } = validated.data
-
-          const user = await prisma.user.findFirst({
+          const user = await prisma.user.findUnique({
             where: { email },
           })
 
@@ -73,13 +67,19 @@ export const authConfig = {
       if (routeAccess.reason === 'unauthorized') {
         return Response.redirect(new URL('/', nextUrl))
       }
+
+      if (auth?.user?.emailVerified === null) {
+        return Response.redirect(new URL('/auth/verify-email', nextUrl))
+      }
+
       return false
     },
     // With database sessions, we receive user directly from DB
     jwt({ token, user, trigger, session }) {
       if (user) {
-        token.id = user.id as string
+        token.id = user.id
         token.role = user.role
+        token.emailVerified = user.emailVerified
       }
       if (trigger === 'update' && session) {
         token = { ...token, ...session }
@@ -89,6 +89,7 @@ export const authConfig = {
     session({ session, token }) {
       session.user.id = token.id as string
       session.user.role = token.role as Role
+      session.user.emailVerified = token.emailVerified as Date | null
       return session
     },
   },
