@@ -15,7 +15,7 @@
     "format:check": "prettier --check \"src/**/*.{js,ts,json,css,md,jsx,tsx}\"",
     "test:e2e": "playwright test",
     "test:ui": "playwright test --ui",
-    "email:dev": "email dev"
+    "email:dev": "email dev --dir ./src/shared/emails"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
