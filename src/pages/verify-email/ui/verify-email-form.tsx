@@ -1,17 +1,10 @@
-'use client'
-
-import { useSession } from 'next-auth/react'
 import { Card, CardContent, CardFooter } from '@shared/ui/card'
 import { Button } from '@shared/ui/button'
 import { Send } from 'lucide-react'
+import { auth } from '@shared/api/auth'
 
-export function VerifyEmailForm() {
-  const { data: session } = useSession()
-
-  const handleSendVerification = async () => {
-    // TODO: Implement send verification email action
-    console.log('Sending verification email to:', session?.user?.email)
-  }
+export async function VerifyEmailForm() {
+  const session = await auth()
 
   return (
     <Card className="mx-auto max-w-md">
@@ -31,7 +24,7 @@ export function VerifyEmailForm() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button onClick={handleSendVerification} className="w-full">
+        <Button className="w-full">
           <Send className="mr-2 h-4 w-4" />
           Send Verification Email
         </Button>

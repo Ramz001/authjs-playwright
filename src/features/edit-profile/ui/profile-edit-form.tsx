@@ -19,6 +19,7 @@ import { Spinner } from '@/shared/ui/spinner'
 import { editProfileAction } from '../api/edit-profile.action'
 import { EditProfileSchema } from '../schemas/edit-profile.schema'
 import { handleError } from '@shared/utils/handle-error'
+import { isSuccess } from '@shared/api/server-error-handlers'
 
 export function ProfileEditForm() {
   const { data: session, update } = useSession()
@@ -33,13 +34,13 @@ export function ProfileEditForm() {
     },
     onSubmit: async ({ value }) => {
       try {
-        const result = await editProfileAction(value)
+        const res = await editProfileAction(value)
 
-        if (!result.success) {
-          throw new Error(result.error || 'Failed to update profile')
+        if (!isSuccess(res)) {
+          throw new Error(res.error?.message || 'Failed to update profile')
         }
 
-        await update(result.data)
+        await update(res.data)
 
         toast.success('Profile updated successfully')
       } catch (error) {

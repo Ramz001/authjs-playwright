@@ -29,6 +29,7 @@ import { useState } from 'react'
 import { handleError } from '@shared/utils/handle-error'
 import { useRouter } from 'next/navigation'
 import { mapAuthErrorMessage } from '@shared/utils/map-authjs-error'
+import { isSuccess } from '@shared/api/server-error-handlers'
 
 export function SignUpForm() {
   const router = useRouter()
@@ -49,8 +50,8 @@ export function SignUpForm() {
       try {
         const resAction = await signUpAction(value)
 
-        if (!resAction.success) {
-          throw new Error(resAction.error || 'Sign up failed')
+        if (!isSuccess(resAction)) {
+          throw new Error(resAction.error?.message || 'Sign up failed')
         }
 
         const res = await signIn('credentials', {

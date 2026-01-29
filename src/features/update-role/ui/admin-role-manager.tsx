@@ -27,6 +27,7 @@ import { updateUserRoleAction } from '../api/update-role.action'
 import { RoleType, role } from '@shared/models/primitive.schema'
 import { UpdateRoleSchema } from '../models/update-role.schema'
 import { handleError } from '@shared/utils/handle-error'
+import { isSuccess } from '@shared/api/server-error-handlers'
 
 export function AdminRoleManager() {
   const form = useForm({
@@ -41,8 +42,8 @@ export function AdminRoleManager() {
       try {
         const res = await updateUserRoleAction(value)
 
-        if (!res.success) {
-          toast.error(res.error || 'Failed to update user role')
+        if (!isSuccess(res)) {
+          toast.error(res.error?.message || 'Failed to update user role')
           return
         }
 

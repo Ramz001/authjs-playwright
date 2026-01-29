@@ -11,7 +11,7 @@ import {
 
 interface OTPEmailProps {
   otp: string
-  userName?: string
+  name?: string
   expiryTime?: string
 }
 
@@ -21,7 +21,7 @@ const baseUrl = process.env.VERCEL_URL
 
 export default function OTPEmail({
   otp = '123456',
-  userName = 'User',
+  name = 'User',
   expiryTime = '10 minutes',
 }: OTPEmailProps) {
   return (
@@ -36,7 +36,7 @@ export default function OTPEmail({
 
           {/* Main Content */}
           <Section style={content}>
-            <Text style={greeting}>Hi {userName},</Text>
+            <Text style={greeting}>Hi {name},</Text>
 
             <Text style={mainText}>
               Your one-time password (OTP) for email verification is:

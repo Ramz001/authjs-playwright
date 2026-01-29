@@ -1,32 +1,30 @@
 'use server'
 
 import prisma from '@/shared/lib/prisma'
-import {
-  withActionErrorHandler,
-  type ActionResponse,
-} from '@/shared/api/with-action-error-handler'
+import { withActionErrorHandler } from '@shared/api/server-error-handlers'
 import {
   EditProfileSchema,
   type EditProfileSchemaType,
 } from '../schemas/edit-profile.schema'
-import type { Session } from 'next-auth'
 import { requireAuth } from '@shared/api/auth.guard'
+import { ActionSuccess } from '@shared/api/server-error-handlers'
 
-export const editProfileAction = async (
+const editProfile = async (
   values: EditProfileSchemaType
-): Promise<ActionResponse<Session['user']>> =>
-  withActionErrorHandler(async () => {
-    const user = await requireAuth()
+): Promise<ActionSuccess<typeof updatedUser>> => {
+  const user = await requireAuth()
 
-    const { name, email } = await EditProfileSchema.parseAsync(values)
+  const { name, email } = await EditProfileSchema.parseAsync(values)
 
-    const updatedUser = await prisma.user.update({
-      where: { id: user.id },
-      data: {
-        name,
-        email,
-      },
-    })
-
-    return { success: true, data: updatedUser }
+  const updatedUser = await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      name,
+      email,
+    },
   })
+
+  return { success: true, data: updatedUser }
+}
+
+export const editProfileAction = withActionErrorHandler(editProfile)

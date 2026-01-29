@@ -25,6 +25,7 @@
       "@pages/*": ["./src/pages/*"],
       "@shared/*": ["./src/shared/*"],
       "@widgets/*": ["./src/widgets/*"],
+      "@emails/*": ["./emails/*"],
 
       "@/*": ["./src/*"]
     }
