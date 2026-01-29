@@ -1,7 +1,7 @@
 'use server'
 
 import resend from '@/shared/lib/resend'
-import OTPEmail from '@emails/otp-email'
+import OTPEmail from '@shared/emails/otp-email'
 import prisma from '@shared/lib/prisma'
 import {
   withActionErrorHandler,
