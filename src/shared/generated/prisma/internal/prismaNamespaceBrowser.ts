@@ -59,6 +59,7 @@ export const ModelName = {
   Session: 'Session',
   User: 'User',
   VerificationToken: 'VerificationToken',
+  RateLimiterFlexible: 'RateLimiterFlexible',
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -140,10 +141,20 @@ export const VerificationTokenScalarFieldEnum = {
   identifier: 'identifier',
   token: 'token',
   expires: 'expires',
+  createdAt: 'createdAt',
 } as const
 
 export type VerificationTokenScalarFieldEnum =
   (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
+
+export const RateLimiterFlexibleScalarFieldEnum = {
+  key: 'key',
+  points: 'points',
+  expire: 'expire',
+} as const
+
+export type RateLimiterFlexibleScalarFieldEnum =
+  (typeof RateLimiterFlexibleScalarFieldEnum)[keyof typeof RateLimiterFlexibleScalarFieldEnum]
 
 export const SortOrder = {
   asc: 'asc',

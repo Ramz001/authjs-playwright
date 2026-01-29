@@ -1,7 +1,6 @@
 import { Card, CardContent, CardFooter } from '@shared/ui/card'
-import { Button } from '@shared/ui/button'
-import { Send } from 'lucide-react'
 import { auth } from '@shared/api/auth'
+import OTPInputSection from './otp-input'
 
 export async function VerifyEmailForm() {
   const session = await auth()
@@ -15,19 +14,16 @@ export async function VerifyEmailForm() {
         </div>
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm">
-            We&apos;ll send a verification link to your email address. Click the
-            link in the email to verify your account.
-          </p>
-          <p className="text-muted-foreground text-sm">
-            If you don&apos;t see the email, please check your spam folder.
+            We&apos;ll send a verification link to your email address. If you
+            don&apos;t see the email, please check your spam folder.
           </p>
         </div>
       </CardContent>
-      <CardFooter>
-        <Button className="w-full">
-          <Send className="mr-2 h-4 w-4" />
-          Send Verification Email
-        </Button>
+      <CardFooter className='w-full'>
+        <OTPInputSection
+          name={session?.user?.name || ''}
+          email={session?.user?.email || ''}
+        />
       </CardFooter>
     </Card>
   )

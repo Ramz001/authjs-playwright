@@ -4,11 +4,13 @@ import { Send } from 'lucide-react'
 import {
   SendEmailSchema,
   type SendEmailType,
-} from '../models/send-email.schema'
+} from '../models/verify-email.schema'
 import { handleError } from '@shared/utils/handle-error'
 import { useTransition } from 'react'
 import { sendEmailOTPAction } from '../api/send-email-otp.action'
 import { isSuccess } from '@shared/api/server-error-handlers'
+import { Spinner } from '@shared/ui/spinner'
+import { toast } from 'sonner'
 
 export default function SendEmailButton({ email, name }: SendEmailType) {
   const [isPending, startTransition] = useTransition()
@@ -25,6 +27,8 @@ export default function SendEmailButton({ email, name }: SendEmailType) {
             res?.error?.message || 'Failed to send verification email'
           )
         }
+
+        toast.success('Verification email sent! Check your inbox.')
       } catch (error) {
         handleError(error)
       }
@@ -32,8 +36,12 @@ export default function SendEmailButton({ email, name }: SendEmailType) {
   }
 
   return (
-    <Button className="w-full" onClick={handleClick} disabled={isPending}>
-      <Send className="mr-2 h-4 w-4" />
+    <Button size={'sm'} onClick={handleClick} disabled={isPending}>
+      {isPending ? (
+        <Spinner className="mr-2 h-4 w-4" />
+      ) : (
+        <Send className="mr-2 h-4 w-4" />
+      )}
       Send Verification Email
     </Button>
   )

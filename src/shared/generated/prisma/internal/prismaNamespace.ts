@@ -417,6 +417,7 @@ export const ModelName = {
   Session: 'Session',
   User: 'User',
   VerificationToken: 'VerificationToken',
+  RateLimiterFlexible: 'RateLimiterFlexible',
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -444,6 +445,7 @@ export type TypeMap<
       | 'session'
       | 'user'
       | 'verificationToken'
+      | 'rateLimiterFlexible'
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -827,6 +829,82 @@ export type TypeMap<
         }
       }
     }
+    RateLimiterFlexible: {
+      payload: Prisma.$RateLimiterFlexiblePayload<ExtArgs>
+      fields: Prisma.RateLimiterFlexibleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RateLimiterFlexibleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RateLimiterFlexibleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload>
+        }
+        findFirst: {
+          args: Prisma.RateLimiterFlexibleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RateLimiterFlexibleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload>
+        }
+        findMany: {
+          args: Prisma.RateLimiterFlexibleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload>[]
+        }
+        create: {
+          args: Prisma.RateLimiterFlexibleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload>
+        }
+        createMany: {
+          args: Prisma.RateLimiterFlexibleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RateLimiterFlexibleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload>[]
+        }
+        delete: {
+          args: Prisma.RateLimiterFlexibleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload>
+        }
+        update: {
+          args: Prisma.RateLimiterFlexibleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload>
+        }
+        deleteMany: {
+          args: Prisma.RateLimiterFlexibleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RateLimiterFlexibleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RateLimiterFlexibleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload>[]
+        }
+        upsert: {
+          args: Prisma.RateLimiterFlexibleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RateLimiterFlexiblePayload>
+        }
+        aggregate: {
+          args: Prisma.RateLimiterFlexibleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRateLimiterFlexible>
+        }
+        groupBy: {
+          args: Prisma.RateLimiterFlexibleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RateLimiterFlexibleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RateLimiterFlexibleCountArgs<ExtArgs>
+          result:
+            | runtime.Types.Utils.Optional<Prisma.RateLimiterFlexibleCountAggregateOutputType>
+            | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -929,10 +1007,20 @@ export const VerificationTokenScalarFieldEnum = {
   identifier: 'identifier',
   token: 'token',
   expires: 'expires',
+  createdAt: 'createdAt',
 } as const
 
 export type VerificationTokenScalarFieldEnum =
   (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
+
+export const RateLimiterFlexibleScalarFieldEnum = {
+  key: 'key',
+  points: 'points',
+  expire: 'expire',
+} as const
+
+export type RateLimiterFlexibleScalarFieldEnum =
+  (typeof RateLimiterFlexibleScalarFieldEnum)[keyof typeof RateLimiterFlexibleScalarFieldEnum]
 
 export const SortOrder = {
   asc: 'asc',
@@ -1155,6 +1243,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   user?: Prisma.UserOmit
   verificationToken?: Prisma.VerificationTokenOmit
+  rateLimiterFlexible?: Prisma.RateLimiterFlexibleOmit
 }
 
 /* Types for Logging */

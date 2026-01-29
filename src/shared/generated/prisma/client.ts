@@ -69,3 +69,8 @@ export type User = Prisma.UserModel
  *
  */
 export type VerificationToken = Prisma.VerificationTokenModel
+/**
+ * Model RateLimiterFlexible
+ *
+ */
+export type RateLimiterFlexible = Prisma.RateLimiterFlexibleModel

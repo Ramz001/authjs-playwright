@@ -52,7 +52,7 @@ model Session {
 model User {
   id            String          @id @default(cuid())
   name          String
-  email         String         @unique
+  email         String          @unique
   emailVerified DateTime?
   image         String?
   createdAt     DateTime        @default(now())
@@ -68,8 +68,15 @@ model VerificationToken {
   identifier String
   token      String
   expires    DateTime
+  createdAt  DateTime @default(now())
 
   @@id([identifier, token])
+}
+
+model RateLimiterFlexible {
+  key    String    @id
+  points Int
+  expire DateTime?
 }
 
 enum Role {

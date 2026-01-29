@@ -9,5 +9,6 @@ export const name = z
   .min(2, 'Name must be at least 2 characters')
   .max(50, 'Name must be at most 50 characters')
 export const role = z.enum(Role)
+export const otp = z.string().length(6, 'OTP must be 6 digits')
 
 export type RoleType = z.infer<typeof role>

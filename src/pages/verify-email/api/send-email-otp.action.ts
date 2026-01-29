@@ -10,13 +10,21 @@ import {
 import {
   SendEmailSchema,
   type SendEmailType,
-} from '../models/send-email.schema'
+} from '../models/verify-email.schema'
+import { requireAuth } from '@shared/api/auth.guard'
+import { handleRateLimit } from '@shared/api/handle-rate-limit'
 
 const EMAIL_EXPIRY_MINUTES = 5
 
 const sendEmailOTP = async (
   values: SendEmailType
 ): Promise<ActionSuccess<typeof data>> => {
+  await handleRateLimit({
+    action: 'send_email_otp',
+    points: 1,
+  })
+  await requireAuth()
+
   const { email, name } = SendEmailSchema.parse(values)
 
   const randomCode = Math.floor(100000 + Math.random() * 900000).toString()
