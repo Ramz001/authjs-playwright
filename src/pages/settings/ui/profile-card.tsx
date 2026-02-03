@@ -8,7 +8,7 @@ import {
 } from '@/shared/ui/card'
 import { Badge } from '@/shared/ui/badge'
 import Image from 'next/image'
-import { Role } from '@/shared/generated/prisma/enums'
+import { Role } from '@shared/prisma/generated/enums'
 
 export async function ProfileCard() {
   const session = await auth()

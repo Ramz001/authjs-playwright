@@ -4,7 +4,7 @@ import prisma from '@/shared/lib/prisma'
 import { LoginSchema } from '@shared/models/auth.schema'
 import GithubProvider from 'next-auth/providers/github'
 import { NextAuthConfig } from 'next-auth'
-import { Role } from '@/shared/generated/prisma/enums'
+import { Role } from '@shared/prisma/generated/enums'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 
 export const authConfig = {

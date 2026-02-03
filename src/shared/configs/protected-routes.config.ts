@@ -1,4 +1,4 @@
-import { Role } from '@shared/generated/prisma/enums'
+import { Role } from '@shared/prisma/generated/enums'
 export const DEFAULT_UNAUTHENTICATED_REDIRECT = '/'
 
 export type AccessPolicyEntry = {

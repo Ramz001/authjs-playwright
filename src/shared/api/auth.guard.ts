@@ -1,5 +1,5 @@
 import { auth } from './auth'
-import { Role } from '@shared/generated/prisma/enums'
+import { Role } from '@shared/prisma/generated/enums'
 import { Session } from 'next-auth'
 
 /**

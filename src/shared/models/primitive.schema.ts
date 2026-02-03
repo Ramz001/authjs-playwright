@@ -1,4 +1,4 @@
-import { Role } from '@shared/generated/prisma/enums'
+import { Role } from '@shared/prisma/generated/enums'
 import z from 'zod'
 
 export const password = z.string().min(6)

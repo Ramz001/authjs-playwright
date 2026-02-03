@@ -4,7 +4,7 @@ import path from 'path' // For handling file paths
 import dotenv from 'dotenv' // For environment variables
 import { JWT } from 'next-auth/jwt' // For handling JWT tokens
 import { getSessionToken } from '../utils/get-session-token.util'
-import { Role } from '@shared/generated/prisma/enums'
+import { Role } from '@shared/prisma/generated/enums'
 
 // Load environment variables
 dotenv.config()
