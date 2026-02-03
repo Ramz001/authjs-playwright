@@ -6,7 +6,7 @@ import {
   type SendEmailType,
 } from '../models/verify-email.schema'
 import { handleError } from '@shared/utils/handle-error'
-import { useTransition } from 'react'
+import { useTransition, useState, useEffect } from 'react'
 import { sendEmailOTPAction } from '../api/send-email-otp.action'
 import { isSuccess } from '@shared/api/server-error-handlers'
 import { Spinner } from '@shared/ui/spinner'
@@ -14,6 +14,14 @@ import { toast } from 'sonner'
 
 export default function SendEmailButton({ email, name }: SendEmailType) {
   const [isPending, startTransition] = useTransition()
+  const [countdown, setCountdown] = useState(0)
+
+  useEffect(() => {
+    if (countdown > 0) {
+      const timer = setTimeout(() => setCountdown(countdown - 1), 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [countdown])
 
   const handleClick = () => {
     startTransition(async () => {
@@ -29,6 +37,7 @@ export default function SendEmailButton({ email, name }: SendEmailType) {
         }
 
         toast.success('Verification email sent! Check your inbox.')
+        setCountdown(60)
       } catch (error) {
         handleError(error)
       }
@@ -40,10 +49,10 @@ export default function SendEmailButton({ email, name }: SendEmailType) {
       variant={'outline'}
       size={'sm'}
       onClick={handleClick}
-      disabled={isPending}
+      disabled={isPending || countdown > 0}
     >
       {isPending ? <Spinner /> : <Send />}
-      Send Email
+      {countdown > 0 ? `Wait ${countdown}s` : 'Send Email'}
     </Button>
   )
 }

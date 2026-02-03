@@ -18,10 +18,14 @@ import {
   ConfirmEmailOTPSchema,
   type SendEmailType,
 } from '../models/verify-email.schema'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 export default function OTPInputSection({ email }: SendEmailType) {
   const [otp, setOtp] = useState('')
   const [isPending, startTransition] = useTransition()
+  const { update } = useSession()
+  const router = useRouter()
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -36,7 +40,10 @@ export default function OTPInputSection({ email }: SendEmailType) {
           throw new Error(res?.error?.message || 'Failed to verify OTP')
         }
 
+        await update(res.data)
+
         toast.success('Email verified successfully!')
+        router.push('/')
       } catch (error) {
         handleError(error)
       }

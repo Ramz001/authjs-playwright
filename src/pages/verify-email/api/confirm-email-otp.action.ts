@@ -13,7 +13,7 @@ import { requireAuth } from '@shared/api/auth.guard'
 
 const confirmEmailOTP = async (
   values: ConfirmEmailOTPType
-): Promise<ActionSuccess<undefined>> => {
+): Promise<ActionSuccess<typeof user>> => {
   await requireAuth()
   const { email, otp } = ConfirmEmailOTPSchema.parse(values)
 
@@ -46,7 +46,7 @@ const confirmEmailOTP = async (
   }
 
   // Update user's emailVerified field
-  await prisma.user.update({
+  const user = await prisma.user.update({
     where: { email },
     data: { emailVerified: new Date() },
   })
@@ -61,7 +61,7 @@ const confirmEmailOTP = async (
     },
   })
 
-  return { success: true }
+  return { success: true, data: user }
 }
 
 export const confirmEmailOTPAction = withActionErrorHandler(confirmEmailOTP)
