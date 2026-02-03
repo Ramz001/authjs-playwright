@@ -1,6 +1,7 @@
 import ToastProvider from './toast.provider'
 import AuthSessionProvider from './session.provider'
 import ThemeProvider from './theme.provider'
+import BackgroundPattern from '@app/styles/background-pattern'
 
 export default function RootProvider({
   children,
@@ -10,7 +11,10 @@ export default function RootProvider({
   return (
     <AuthSessionProvider>
       <ThemeProvider>
-        <ToastProvider>{children}</ToastProvider>
+        <ToastProvider>
+          <BackgroundPattern />
+          {children}
+        </ToastProvider>
       </ThemeProvider>
     </AuthSessionProvider>
   )

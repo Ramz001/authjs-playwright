@@ -1,7 +1,7 @@
 import Gutter from '@shared/ui/gutter'
 import { VerifyEmailForm } from './ui/verify-email-form'
 
-export default function VerifyEmailPage() {
+export default async function VerifyEmailPage() {
   return (
     <Gutter className="flex min-h-screen flex-col items-center justify-center gap-4">
       <header className="max-w-md space-y-1 text-center">

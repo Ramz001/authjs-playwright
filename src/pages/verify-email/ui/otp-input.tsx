@@ -49,16 +49,34 @@ export default function OTPInputSection({ email }: SendEmailType) {
       className="flex w-full flex-col items-center justify-center space-y-4"
     >
       <InputOTP maxLength={6} value={otp} onChange={setOtp}>
-        <InputOTPGroup className="gap-3">
-          <InputOTPSlot className="size-12 text-xl font-semibold" index={0} />
-          <InputOTPSlot className="size-12 text-xl font-semibold" index={1} />
-          <InputOTPSlot className="size-12 text-xl font-semibold" index={2} />
+        <InputOTPGroup>
+          <InputOTPSlot
+            className="border-border text-xl font-semibold sm:size-14"
+            index={0}
+          />
+          <InputOTPSlot
+            className="border-border text-xl font-semibold sm:size-14"
+            index={1}
+          />
+          <InputOTPSlot
+            className="border-border text-xl font-semibold sm:size-14"
+            index={2}
+          />
         </InputOTPGroup>
-        <InputOTPSeparator className="mx-2" />
-        <InputOTPGroup className="gap-3">
-          <InputOTPSlot className="size-12 text-xl font-semibold" index={3} />
-          <InputOTPSlot className="size-12 text-xl font-semibold" index={4} />
-          <InputOTPSlot className="size-12 text-xl font-semibold" index={5} />
+        <InputOTPSeparator className="sm:mx-4" />
+        <InputOTPGroup>
+          <InputOTPSlot
+            className="border-border text-xl font-semibold sm:size-14"
+            index={3}
+          />
+          <InputOTPSlot
+            className="border-border text-xl font-semibold sm:size-14"
+            index={4}
+          />
+          <InputOTPSlot
+            className="border-border text-xl font-semibold sm:size-14"
+            index={5}
+          />
         </InputOTPGroup>
       </InputOTP>
       <Button

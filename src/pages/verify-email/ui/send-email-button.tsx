@@ -43,7 +43,7 @@ export default function SendEmailButton({ email, name }: SendEmailType) {
       disabled={isPending}
     >
       {isPending ? <Spinner /> : <Send />}
-      Send Verification Email
+      Send Email
     </Button>
   )
 }

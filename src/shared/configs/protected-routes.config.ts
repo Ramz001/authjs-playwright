@@ -17,4 +17,8 @@ export const ACCESS_POLICY: AccessPolicyEntry[] = [
     protected: true,
     roles: [Role.ADMIN],
   },
+  {
+    matcher: /^\/auth\/verify-email(\/|$)/,
+    protected: true,
+  },
 ]
