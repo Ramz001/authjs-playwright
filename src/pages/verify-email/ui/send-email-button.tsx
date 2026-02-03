@@ -36,12 +36,13 @@ export default function SendEmailButton({ email, name }: SendEmailType) {
   }
 
   return (
-    <Button size={'sm'} onClick={handleClick} disabled={isPending}>
-      {isPending ? (
-        <Spinner className="mr-2 h-4 w-4" />
-      ) : (
-        <Send className="mr-2 h-4 w-4" />
-      )}
+    <Button
+      variant={'outline'}
+      size={'sm'}
+      onClick={handleClick}
+      disabled={isPending}
+    >
+      {isPending ? <Spinner /> : <Send />}
       Send Verification Email
     </Button>
   )

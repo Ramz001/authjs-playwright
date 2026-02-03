@@ -1,8 +1,12 @@
 'use client'
 
 import { Button } from '@shared/ui/button'
-import { InputOTP, InputOTPSlot, InputOTPGroup } from '@shared/ui/input-otp'
-import { Label } from '@shared/ui/label'
+import {
+  InputOTP,
+  InputOTPSlot,
+  InputOTPGroup,
+  InputOTPSeparator,
+} from '@shared/ui/input-otp'
 import { CheckCircle } from 'lucide-react'
 import { useState, useTransition } from 'react'
 import { handleError } from '@shared/utils/handle-error'
@@ -40,29 +44,32 @@ export default function OTPInputSection({ email }: SendEmailType) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="space-y-2 w-full ">
-        <Label htmlFor="otp">Enter verification code</Label>
-        <InputOTP maxLength={6} defaultValue={otp} onChange={setOtp}>
-          <InputOTPGroup>
-            <InputOTPSlot index={0} />
-            <InputOTPSlot index={1} />
-            <InputOTPSlot index={2} />
-            <InputOTPSlot index={3} />
-            <InputOTPSlot index={4} />
-            <InputOTPSlot index={5} />
-          </InputOTPGroup>
-        </InputOTP>
-      </div>
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-full flex-col items-center justify-center space-y-4"
+    >
+      <InputOTP maxLength={6} value={otp} onChange={setOtp}>
+        <InputOTPGroup className="gap-3">
+          <InputOTPSlot className="size-12 text-xl font-semibold" index={0} />
+          <InputOTPSlot className="size-12 text-xl font-semibold" index={1} />
+          <InputOTPSlot className="size-12 text-xl font-semibold" index={2} />
+        </InputOTPGroup>
+        <InputOTPSeparator className="mx-2" />
+        <InputOTPGroup className="gap-3">
+          <InputOTPSlot className="size-12 text-xl font-semibold" index={3} />
+          <InputOTPSlot className="size-12 text-xl font-semibold" index={4} />
+          <InputOTPSlot className="size-12 text-xl font-semibold" index={5} />
+        </InputOTPGroup>
+      </InputOTP>
       <Button
         type="submit"
-        className="w-full"
+        className="h-12 w-full text-base font-semibold"
         disabled={isPending || otp.length !== 6}
       >
         {isPending ? (
-          <Spinner className="mr-2 h-4 w-4" />
+          <Spinner className="mr-2 h-5 w-5" />
         ) : (
-          <CheckCircle className="mr-2 h-4 w-4" />
+          <CheckCircle className="mr-2 h-5 w-5" />
         )}
         Verify Email
       </Button>

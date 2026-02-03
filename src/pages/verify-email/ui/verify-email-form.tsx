@@ -1,6 +1,7 @@
 import { Card, CardContent, CardFooter } from '@shared/ui/card'
 import { auth } from '@shared/api/auth'
 import OTPInputSection from './otp-input'
+import SendEmailButton from './send-email-button'
 
 export async function VerifyEmailForm() {
   const session = await auth()
@@ -18,8 +19,12 @@ export async function VerifyEmailForm() {
             don&apos;t see the email, please check your spam folder.
           </p>
         </div>
+        <SendEmailButton
+          name={session?.user?.name || ''}
+          email={session?.user?.email || ''}
+        />
       </CardContent>
-      <CardFooter className='w-full'>
+      <CardFooter className="w-full">
         <OTPInputSection
           name={session?.user?.name || ''}
           email={session?.user?.email || ''}
