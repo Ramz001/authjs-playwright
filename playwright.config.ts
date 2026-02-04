@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test'
-
+import path from 'path'
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -31,7 +31,11 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     baseURL: 'http://localhost:3000',
+    storageState: 'tests/setup/state.json',
   },
+
+  globalSetup: path.resolve('./tests/setup/global.setup'),
+  globalTeardown: path.resolve('./tests/setup/global.teardown'),
 
   /* Configure projects for major browsers */
   projects: [

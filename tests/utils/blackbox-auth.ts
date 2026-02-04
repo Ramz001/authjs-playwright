@@ -1,14 +1,6 @@
 import { Page } from '@playwright/test'
 import 'dotenv/config'
 
-/**
- * Blackbox login utility for Playwright tests.
- * Uses environment variables for test user credentials.
- *
- * Required environment variables:
- * - TEST_USER_EMAIL: Email address of the test user
- * - TEST_USER_PASSWORD: Password of the test user
- */
 export async function loginAsTestUser(page: Page): Promise<void> {
   const email = process.env.TEST_USER_EMAIL
   const password = process.env.TEST_USER_PASSWORD

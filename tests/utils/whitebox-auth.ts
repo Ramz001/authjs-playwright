@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-export async function getSessionToken(payload: JWT) {
+export async function getWhiteboxSessionToken(payload: JWT) {
   if (!process.env.AUTH_SECRET) throw new Error('Auth secret not found.')
 
   const { encode } = await import('next-auth/jwt')

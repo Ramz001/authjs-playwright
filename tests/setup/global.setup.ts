@@ -1,12 +1,9 @@
-// Essential imports
 import { chromium } from '@playwright/test' // For browser automation
-import path from 'path' // For handling file paths
-import dotenv from 'dotenv' // For environment variables
-import { JWT } from 'next-auth/jwt' // For handling JWT tokens
-import { getSessionToken } from '../utils/get-session-token.util'
-import { Role } from '@shared/prisma/generated/enums'
+import path from 'path'
+import dotenv from 'dotenv'
+import { getWhiteboxSessionToken } from '../utils/whitebox-auth'
+import { AUTH_USER } from '../consts/auth-tokens'
 
-// Load environment variables
 dotenv.config()
 
 // Constants definition
@@ -15,14 +12,6 @@ const DOMAIN = 'localhost'
 const STORAGE_STATE_PATH = path.join(__dirname, '/state.json')
 
 export default async function globalSetup() {
-  // Define JWT payload
-  const payload: JWT = {
-    id: '672f182cd5370728d87c545e',
-    role: Role.USER,
-    email: 'test@example.com',
-    name: 'John Doe',
-  }
-
   // Declare variables for browser management
   let browser
   let context
@@ -35,7 +24,7 @@ export default async function globalSetup() {
     context = await browser.newContext()
 
     // Create session token
-    const sessionToken = await getSessionToken(payload)
+    const sessionToken = await getWhiteboxSessionToken(AUTH_USER)
 
     // Add authentication cookie
     await context.addCookies([

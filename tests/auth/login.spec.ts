@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { loginAsTestUser } from '../utils/login.util'
+import { loginAsTestUser } from '../utils/blackbox-auth'
 
 test.describe('Login functionality', () => {
   test('should login successfully using environment variables', async ({
