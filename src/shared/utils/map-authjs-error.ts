@@ -15,7 +15,7 @@ const AUTH_ERROR_MESSAGE: Record<string, string> = {
 /**
  * Handles errors thrown from `signIn({ redirect: false })`
  */
-export function mapAuthErrorMessage(error: string) {
+export function throwAuthError(error: string) {
   const message =
     error in AUTH_ERROR_MESSAGE
       ? AUTH_ERROR_MESSAGE[error]

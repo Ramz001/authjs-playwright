@@ -26,7 +26,7 @@ import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { handleError } from '@shared/utils/handle-error'
 import { useRouter } from 'next/navigation'
-import { mapAuthErrorMessage } from '@shared/utils/map-authjs-error'
+import { throwAuthError } from '@shared/utils/map-authjs-error'
 import { LoginSchema } from '@shared/models/auth.schema'
 
 export function SignInForm() {
@@ -43,13 +43,13 @@ export function SignInForm() {
     },
     onSubmit: async ({ value }) => {
       try {
-        const res = await signIn('credentials', {
+        const result = await signIn('credentials', {
           ...value,
           redirect: false,
         })
 
-        if (res?.error) {
-          mapAuthErrorMessage(res.error)
+        if (result?.error) {
+          throwAuthError(result.error)
         }
 
         toast.success('Signed in successfully.')

@@ -28,7 +28,7 @@ import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { handleError } from '@shared/utils/handle-error'
 import { useRouter } from 'next/navigation'
-import { mapAuthErrorMessage } from '@shared/utils/map-authjs-error'
+import { throwAuthError } from '@shared/utils/map-authjs-error'
 import { isSuccess } from '@shared/api/server-error-handlers'
 
 export function SignUpForm() {
@@ -61,7 +61,7 @@ export function SignUpForm() {
         })
 
         if (res?.error) {
-          mapAuthErrorMessage(res.error)
+          throwAuthError(res.error)
         }
 
         toast.success('Account created! You can now sign in.')
